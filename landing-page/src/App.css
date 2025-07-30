@@ -1,3 +1,34 @@
+.Header {
+  height: 96px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-bottom: solid 1px #e6e8eb;
+}
+
+.Headericon {
+  width: 1000px;
+  height: 64px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0;
+}
+
+.Infront-Logo-with-CDB-logo-1-1 {
+  width: 122px;
+  height: 64px;
+  flex-grow: 0;
+}
+
 .Frame-7 {
   height: 480px;
   align-self: stretch;
@@ -12,18 +43,17 @@
 
 .Frame-5 {
   width: 1000px;
-  height: 480px;
+  height: 338px;
   flex-grow: 0;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
   padding: 40px 0;
 }
 
 .Frame-9 {
-  height: 321px;
+  height: 1000px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -56,23 +86,17 @@
 }
 
 .Digitalise-your-business-with-up-to {
-  width: 369px;
-  height: 81px;
-  flex-grow: 0;
-  font-family: Inter;
   font-size: 32px;
   font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.5;
-  letter-spacing: normal;
-  text-align: left;
   color: #000;
+  text-align: left;
 }
 .Digitalise-your-business-with-up-to .text-style-1 {
+  display: block;
   font-size: 24px;
   line-height: 1.5;
-  color: #7e868c;
+  color: #9ea1a3;
 }
 
 .RM5000-Grant {
@@ -99,8 +123,8 @@
 }
 
 .Frame-13 {
-  width: 191px;
-  height: 46px;
+  width: 150px;
+  height: 30px;
   flex-grow: 0;
   display: flex;
   flex-direction: row;
@@ -113,7 +137,7 @@
 }
 
 .Go-Digital-Now {
-  width: 143px;
+  width: 150px;
   height: 30px;
   flex-grow: 0;
   font-family: Inter;
@@ -128,8 +152,8 @@
 }
 
 .Frame-14 {
-  width: 202px;
-  height: 46px;
+  width: 150px;
+  height: 30px;
   flex-grow: 0;
   display: flex;
   flex-direction: row;
@@ -169,34 +193,10 @@
   padding: 0;
 }
 
-.Frame-5 {
-  width: 1000px;
-  height: 338px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 0;
-}
-
 .image-1 {
   width: 240px;
   height: 92px;
   flex-grow: 0;
-}
-
-
-.Frame-71 {
-  width: 1920px;
-  height: 338px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 0 460px;
 }
 
 .Frame-72 {
@@ -242,19 +242,17 @@
 }
 
 .-matching-grant-or-up-to-RM5000-per-company {
-  width: 499px;
-  height: 30px;
-  flex-grow: 0;
+  display: inline-flex;       
+  align-items: center;
+  gap: 8px;                    
   font-family: Inter;
   font-size: 20px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.5;
-  letter-spacing: normal;
-  text-align: center;
+  text-align: left;           
   color: #11181c;
 }
+
 
 img.check_circle {
   width: 24px;
@@ -264,11 +262,506 @@ img.check_circle {
 }
 
 .Managed-by-Ministry-of-Finance-BSN-MDEC-MCMC {
-  height: 30px;
-  flex-grow: 1;
+  display: inline-flex;       
+  align-items: center;
+  gap: 8px;                    
   font-family: Inter;
   font-size: 20px;
   font-weight: normal;
+  line-height: 1.5;
+  text-align: left;           
+  color: #11181c;
+}
+
+.Frame-51 {
+  height: 65px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background-image: linear-gradient(to right, #f9f9f9, #fdfdfd);
+}
+
+.An-Initiative-Under {
+  height: 18px;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #687076;
+}
+
+.Frame-mdec {
+  width: 307px;
+  height: 32px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+  padding: 0;
+}
+
+.Frame-madani {
+  width: 1000px;
+  height: 258px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.Frame-madaniimg {
+  height: 321px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0;
+}
+
+.Frame-madanicontent {
+  width: 637px;
+  height: 258px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 24px;
+  padding: 0;
+}
+
+.Madani {
+  height: 338px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  background-image: linear-gradient(to bottom, #fde9e1 0%, #fce5f0 100%);}
+
+.Frame-checklogo {
+  height: 62px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0;
+}
+
+.Oursolution {
+  height: 816px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.Oursolutioncontent {
+  width: 1000px;
+  height: 816px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 32px;
+  /* padding: 0px 0; */
+}
+
+.kickstart {
+  height: 104px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.Kickstarts-your-Digital-Journey {
+  width: 477px;
+  height: 48px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+}
+
+.with-Our-Solutions {
+  width: 390px;
+  height: 64px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 48px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fe5000;
+}
+.text-style-1 {
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #000;
+  margin-right: 8px;
+}
+
+.RM8 {
+  height: 36px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.Starting-from-just-RM8month {
+  width: 321px;
+  height: 36px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #11181c;
+}
+.Starting-from-just-RM8month .text-style-1 {
+  color: #fe5000;
+  margin-left: 8px;
+}
+.Starting-from-just-RM8month .text-style-2 {
+  font-size: 18px;
+  line-height: 1.56;
+}
+
+/* Solution section */
+.parentbox {
+  height: 452px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 24px;
+  padding: 0;
+}
+
+.althrnemis360 {
+  display: flex;
+  flex-wrap: wrap;               /* allows wrapping to new row if needed */
+  gap: 24px;                     /* handles both horizontal and vertical spacing */
+  height: auto;                  /* remove fixed height if present */
+  padding: 0;
+}
+
+.SolutionBox {
+  height: 230px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.01);
+  flex: 1;
+  border: 1px solid #e0e0e0;
+}
+
+.Solutions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.solutioncontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.-OFF {
+  width: 70px;
+  height: 24px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fe5000;
+}
+
+.EMIS-360 {
+  height: 48px;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #11181c;
+}
+
+.Simplified-e-Invoicing-solution-for-your-business {
+  height: 24px;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #687076;
+}
+
+.buttonforcards {
+  height: 70px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  /* margin-top: 16px; */
+}
+
+.moredetailsbutton {
+  width: auto;
+  height: auto;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 16px;
+  border: solid 1px #fe5000;
+  background-color: #fbfcfd;
+}
+
+.More-Details {
+  width: 122px;
+  height: 30px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fe5000;
+}
+
+.getofferbutton {
+  width: auto;
+  height: auto;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 300px;
+  background-color: #fe5000;
+}
+
+.Get-Offer {
+  display: inline-flex;       
+  align-items: center;          
+  gap: 8px;                   
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #fbfcfd;
+  width: auto;                 
+  height: auto;                 
+}
+
+/* solution details */
+.solutiondetails {
+  height: 1860px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+.leftrightbanner {
+  width: 1000px;
+  height: 1860px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+}
+
+.tabs {
+  width: 200px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.tabstext {
+  height: 348px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 80px 0;
+}
+
+.tabs-solution {
+  width: 81px;
+  height: 28px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+  text-align: left;
+  color: #687076;
+}
+
+.tabs-solutionlist {
+  height: 168px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 24px;
+  padding: 0;
+}
+
+.item1 {
+  height: 24px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+}
+
+.EMIS-360 {
+  display: inline-flex;      
+  align-items: center;       
+  gap: 8px;                 
+  height: 24px;
+  flex-grow: 1;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fe5000;
+}
+
+.otherssolution {
+  display: inline-flex;      
+  align-items: center;       
+  gap: 8px;                 
+  height: 24px;
+  flex-grow: 1;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.5;

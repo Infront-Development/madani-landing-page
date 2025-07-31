@@ -7,9 +7,6 @@ import {
   ListItem,
   Select,
   TextField,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   MenuItem,
 } from "@mui/material";
 import { 
@@ -17,7 +14,6 @@ import {
   East,
   KeyboardArrowDown,
   AddCircle,
-  ArrowCircleDown,
   LinkedIn,
   Facebook,
   Instagram,
@@ -26,7 +22,7 @@ import {
   Email,
   AutoAwesome,
 } from "@mui/icons-material";
-import { useRef, useState, RefObject, ChangeEvent } from "react";
+import { useRef, useState, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
 

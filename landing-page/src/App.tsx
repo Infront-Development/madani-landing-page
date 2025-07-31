@@ -1,4 +1,3 @@
-
 import './App.css';
 import frame4 from './assets/Frame_4.png';
 import madaniLogo from './assets/image 1.png'
@@ -11,6 +10,7 @@ import rectangleorange from './assets/Rectangle 1.png'
 import grayrectangle from './assets/grayrectangle.png'
 import infrontlogo from './assets/infrontlogo.png'
 import malaysiamadani from './assets/Malaysia_Madani_logo 1.png'
+import GrantForm from './components/GrantForm'
 
 function App() {
   return (
@@ -270,6 +270,8 @@ function App() {
           </div>
         </div>
       </div>
+      <GrantForm />
+      {/* <div className="_form_45"></div><script src="https://infrontapac.activehosted.com/f/embed.php?id=45" charSet="utf-8"></script> */}
     </div>
   );
 }

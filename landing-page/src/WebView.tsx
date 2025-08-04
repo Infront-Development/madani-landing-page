@@ -8,6 +8,8 @@ import {
   Select,
   TextField,
   MenuItem,
+  Fade,
+  Fab,
 } from "@mui/material";
 import { 
   CheckCircle,
@@ -21,8 +23,9 @@ import {
   Phone,
   Email,
   AutoAwesome,
+  VerticalAlignTop,
 } from "@mui/icons-material";
-import { useRef, useState, RefObject } from "react";
+import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
 
@@ -64,6 +67,7 @@ function WebView() {
   const solutionRef = useRef<HTMLDivElement>(null);
   const [solution, setSolution] = useState<string>("");
   const [orgSize, setOrgSize] = useState<string>("");
+  const [scrollToTopButton, setScrollToTopButton] = useState<boolean>(false);
 
   const scrollTo = (ref: RefObject<HTMLDivElement | null>) => {
     if (ref.current && ref.current !== null) {
@@ -75,13 +79,49 @@ function WebView() {
         behavior: "smooth"
       })
     }
-  }
+  };
+
+  useEffect(() => {
+      const toggleVisibility = () => {
+        if ( window.pageYOffset > 100) {
+          setScrollToTopButton(true);
+        } else {
+          setScrollToTopButton(false);
+        }
+      };
+  
+      window.addEventListener("scroll", toggleVisibility);
+      return () => window.removeEventListener("scroll", toggleVisibility);
+    }, []);
+  
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    };
 
   return (
     <Stack alignItems="center">
+      <Fade in={scrollToTopButton}  timeout={300}>
+        <Fab 
+          onClick={scrollToTop} 
+          sx={{
+            position: "fixed", 
+            bottom: 24, 
+            right: 24, 
+            display: scrollToTopButton ? "block" : "hidden",
+            alignItems: "center",
+            bgcolor: "#FE5000",
+            ":hover": {bgcolor: "#ED5F00"}
+          }}
+        >
+          <VerticalAlignTop sx={{mt: "8px", color: "#FFF"}} />
+        </Fab>
+      </Fade>
       <Stack sx={containerStyle} bgcolor="#FFF"  position="sticky" top={0} zIndex={100}>
         <Stack flex={1} p="16px 24px" width={fixWidth}>
-          <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px"/>
+          <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px" onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} style={{cursor: "pointer"}}/>
         </Stack>
         <Stack sx={containerStyle} bgcolor="#FE5000">
           <Stack p="8px" direction="row" alignItems="center" justifyContent="space-between" width={fixWidth}>
@@ -93,17 +133,17 @@ function WebView() {
       <Stack py="40px" sx={{...containerStyle, background: `linear-gradient(180deg, rgba(253, 233, 225, 0.40) 0%, rgba(252, 229, 240, 0.40) 100%), url(${headbackground}) lightgray 50% / cover no-repeat`}} >
         <Stack width={fixWidth} flexDirection="row" justifyContent="center">
           <Stack flex={1}>
-            <Typography fontSize="32px" fontWeight="600" color="#000000">Digitalize your business</Typography>
+            <Typography fontSize="32px" fontWeight="600" color="#000000">Digitalise your business</Typography>
             <Typography fontSize="24px" fontWeight="600" color="#7E868C">with up to</Typography>
             <Stack flexDirection="row" alignItems="center" gap="16px">
               <Typography fontSize="64px" fontWeight="600" color="#FE5000">RM5000 </Typography>
               <Typography mt="12px" fontSize="48px" fontWeight="600" color="#000000">Grant</Typography>
             </Stack>
             <Stack my="16px" flexDirection="row" alignItems="center" gap="12px">
-              <Button variant="contained" sx={{...buttonStyle, px: "px", bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Go Digital Now</Button>
+              <Button variant="contained" sx={{...buttonStyle, px: "px", bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }} onClick={()=> scrollTo(formRef)}>Go Digital Now</Button>
               <Button variant="outlined" sx={{...buttonStyle, px: "24px", bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}} onClick={()=> scrollTo(solutionRef)}>Browse Product</Button>
             </Stack>
-            <Stack p="16px 24px" gap="8px" bgcolor="#FFFFFF" borderRadius="16px">
+            <Stack p="16px 24px" gap="8px" borderRadius="16px" sx={{background: "linear-gradient(90deg, rgba(249, 249, 249, 0.40) 0%, rgba(253, 253, 253, 0.40) 100%)"}}>
               <Typography fontSize="12px" fontWeight="400" color="#687076">An Initiative Under</Typography>
               <Stack display="flex" flexDirection="row" gap="4px">
                 <img src={madanilogo} alt="madani" width="64px" height="24px" />
@@ -118,7 +158,7 @@ function WebView() {
           </Stack>
         </Stack>
       </Stack>
-      <Stack py="40px" sx={{...containerStyle, background: ` linear-gradient(rgba(255, 255, 255, 0.7)), url(${madanibackground}) lightgray 50% / cover no-repeat`}}>
+      <Stack py="40px" sx={{...containerStyle, background: `linear-gradient(rgba(255, 255, 255, 0.7)), url(${madanibackground}) lightgray 50% / cover no-repeat`}}>
         <Stack width={fixWidth} flexDirection="row" justifyContent="space-between">
           <Stack justifyContent="center">
             <img src={madanilogo} alt="madani" width="240px" height="92px" />
@@ -144,7 +184,7 @@ function WebView() {
       <Stack ref={solutionRef} py="80px" sx={{...containerStyle, background: "linear-gradient(0deg, rgba(255, 255, 255, 0.00) 51.62%, #FFF8F9 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.00) 57.5%, #FFF 100%), var(--Grays-Slate-4, #ECEEF0)"}}>
         <Stack width={fixWidth} alignItems="center">
           <Stack alignItems="center" mb="40px">
-            <Typography fontSize="32px" fontWeight="600" color="#000000">Kiskstart Your Digital Journey</Typography>
+            <Typography fontSize="32px" fontWeight="600" color="#000000">Kickstart Your Digital Journey</Typography>
             <Typography fontSize="24px" fontWeight="500" color="#7E868C">with</Typography>
             <Typography mt="-8px" fontSize="48px" fontWeight="600" color="#FE5000">Infront Consulting</Typography>
             <Typography mt="16px" fontSize="20px" fontWeight="600" color="#687076">Officially appointed as a trusted Digitalisation Partner</Typography>
@@ -153,7 +193,7 @@ function WebView() {
             <Stack gap="24px" flexDirection="row">
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${EMIS360_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Matching Grant up to RM5,000</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
                   <Typography fontSize="32px" fontWeight="600" color="#11181C">EMIS 360</Typography>
                   <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
                 </Stack>
@@ -164,7 +204,7 @@ function WebView() {
               </Stack>
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${altHR_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Matching Grant up to RM5,000</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
                   <Stack my="8px">
                     <img src={altHR} alt="alt" width="166px" height="32px"/>
                   </Stack>
@@ -179,7 +219,7 @@ function WebView() {
             <Stack gap="24px" flexDirection="row">
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${inSuite_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Matching Grant up to RM5,000</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
                   <Typography fontSize="32px" fontWeight="600" color="#11181C">inSuite</Typography>
                   <Typography fontSize="16px" fontWeight="600" color="#687076">Optimize with productivity tools & cybersecurity</Typography>
                 </Stack>
@@ -190,7 +230,7 @@ function WebView() {
               </Stack>
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${OMNI_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Matching Grant up to RM5,000</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
                   <Typography fontSize="32px" fontWeight="600" color="#11181C">OMNI</Typography>
                   <Typography fontSize="16px" fontWeight="600" color="#687076">Unify your calls, chats & meetings in the cloud</Typography>
                 </Stack>
@@ -199,6 +239,9 @@ function WebView() {
                   <Button variant="contained" sx={{...buttonStyle, bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD", borderRadius: "300px" }} endIcon={<East />} onClick={()=> scrollTo(formRef)}>Get Offer</Button>
                 </Stack>
               </Stack>
+            </Stack>
+            <Stack alignItems="center" mb="40px">
+              <Typography fontSize="18px" fontWeight="400" color="#687076">Capped at RM5,000</Typography>
             </Stack>
           </Stack>
           <Stack my="40px" flexDirection="row" alignItems="center">
@@ -236,7 +279,7 @@ function WebView() {
         </Stack>
         <Stack flexDirection="column">
           <Stack ref={emisRef} py="40px" gap="16px" flexDirection="row">
-            <SampleProjectImages solution="emis" />
+            <SampleProjectImages solution="emis" view="web"/>
             <Stack>
               <Typography fontSize="24px" fontWeight="600" color="#000000">EMIS 360</Typography>
               <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
@@ -334,11 +377,11 @@ function WebView() {
                 </Button>
               </Stack>
             </Stack>
-            <SampleProjectImages solution="althr"/>
+            <SampleProjectImages solution="althr" view="web"/>
           </Stack>
           <Divider />
           <Stack ref={inSuiteRef} py="40px" gap="16px" flexDirection="row">
-            <SampleProjectImages solution="insuite"/>
+            <SampleProjectImages solution="insuite" view="web"/>
             <Stack>
               <Typography fontSize="24px" fontWeight="600" color="#000000">inSuite</Typography>
               <Typography fontSize="16px" fontWeight="600" color="#687076">Optimize with productivity tools & cybersecurity</Typography>
@@ -396,10 +439,10 @@ function WebView() {
             <Stack>
               <Stack flexDirection="row" alignItems="center" gap="16px">
                 <Typography fontSize="24px" fontWeight="600" color="#000000">OMNI</Typography>
-                  <Stack p="4px 12px" borderRadius="16px" flexDirection="row" alignItems="center" gap="4px" sx={{background: "linear-gradient(90deg, #FFE7DA 0%, #FFF7E8 100%)"}}>
-                    <AutoAwesome sx={{color: "#FE5000"}} />
-                    <Typography mt="2px" fontSize="14px" fontWeight="600" color="#FE5000">AI-Powered</Typography>
-                  </Stack>
+                <Stack p="4px 12px" borderRadius="16px" flexDirection="row" alignItems="center" gap="4px" sx={{background: "linear-gradient(90deg, #FFE7DA 0%, #FFF7E8 100%)"}}>
+                  <AutoAwesome sx={{color: "#FE5000"}} />
+                  <Typography mt="2px" fontSize="14px" fontWeight="600" color="#FE5000">AI-Powered</Typography>
+                </Stack>
               </Stack>
               <Typography fontSize="16px" fontWeight="600" color="#687076">Unify your calls, chats & meetings in the cloud</Typography>
               <Stack py="16px" gap="16px">
@@ -447,7 +490,7 @@ function WebView() {
                 </Button>
               </Stack>
             </Stack>
-            <SampleProjectImages solution="omni"/>
+            <SampleProjectImages solution="omni" view="web"/>
           </Stack>
         </Stack>
       </Stack>
@@ -515,7 +558,7 @@ function WebView() {
                   <Typography fontSize="16px" fontWeight="400" color="#11181C">Infront Consulting delivers the service.</Typography>
                 </ListItem>
                 <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">BSN will disburse 50% (up to RM5,000)directly to Infront Consulting in stages.</Typography>
+                  <Typography fontSize="16px" fontWeight="400" color="#11181C">BSN will disburse 50% (up to RM5,000) directly to Infront Consulting in stages.</Typography>
                 </ListItem>
               </List>
             </Stack>
@@ -579,7 +622,7 @@ function WebView() {
               </Stack>
               <Stack flex={1}>
                 <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
-                <Select value={orgSize} label="Please select size of organization" onChange={(e)=> setOrgSize(e.target.value)}>
+                <Select value={orgSize} label="Please select size of organisation" onChange={(e)=> setOrgSize(e.target.value)}>
                   <MenuItem value="10">10+</MenuItem>
                   <MenuItem value="50">50+</MenuItem>
                   <MenuItem value="100">100+</MenuItem>
@@ -624,19 +667,19 @@ function WebView() {
           </Stack>
         </Stack>
       </Stack>
-      <FAQ />
+      <FAQ view="web"/>
       <Stack py="80px" sx={containerStyle} bgcolor="#687076">
         <Stack width={fixWidth} flexDirection="row" justifyContent="space-between">
           <Stack gap="33px">
             <Stack gap="6px" width="331px">
-              <img src={InfrontLogo2} alt="infront-logo" width="229px" height="121px"/>
-              <Typography fontSize="16px" fontWeight="600" color="#D7DBDF">Improving the lives of organizations through the power of technology</Typography>
+              <img src={InfrontLogo2} alt="infront-logo" width="229px" height="121px"  onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} style={{cursor: "pointer"}}/>
+              <Typography fontSize="16px" fontWeight="600" color="#D7DBDF">Improving the lives of organisations through the power of technology</Typography>
             </Stack>
             <Stack gap="29px" flexDirection="row">
-              <Facebook sx={{color: "#FFF", cursor: "pointer"}}/>
-              <LinkedIn sx={{color: "#FFF", cursor: "pointer"}} />
-              <Instagram sx={{color: "#FFF", cursor: "pointer"}} />
-              <Language sx={{color: "#FFF", cursor: "pointer"}} />
+              <Facebook onClick={()=> window.open("https://www.facebook.com/infrontasiapacific/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}}/>
+              <LinkedIn onClick={()=> window.open("https://www.linkedin.com/company/infrontapac/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
+              <Instagram onClick={()=> window.open("https://www.instagram.com/infront.apac/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
+              <Language onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
             </Stack>
           </Stack>
           <Stack justifyContent="center" alignItems="end" gap="16px">

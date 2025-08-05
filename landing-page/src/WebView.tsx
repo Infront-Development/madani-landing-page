@@ -10,6 +10,7 @@ import {
   MenuItem,
   Fade,
   Fab,
+  FormControl
 } from "@mui/material";
 import { 
   CheckCircle,
@@ -28,6 +29,7 @@ import {
 import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
+import { useSubmitForm } from "./hooks/useSubmitForm";
 
 import InfrontLogo from "./assets/images/Infront_Logo_With_CDB_Logo_1.png";
 import InfrontLogo2 from "./assets/images/Infront_Logo_With_CDB_Logo_2.png";
@@ -65,10 +67,9 @@ function WebView() {
   const formRef = useRef<HTMLDivElement>(null);
   const stepByStepRef = useRef<HTMLDivElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
-  const [solution, setSolution] = useState<string>("");
-  const [orgSize, setOrgSize] = useState<string>("");
   const [scrollToTopButton, setScrollToTopButton] = useState<boolean>(false);
-
+  const { register, handleSubmit, onSubmit, errors } = useSubmitForm();
+  
   const scrollTo = (ref: RefObject<HTMLDivElement | null>) => {
     if (ref.current && ref.current !== null) {
       const elementPosition = ref.current.getBoundingClientRect().top;
@@ -79,6 +80,12 @@ function WebView() {
         behavior: "smooth"
       })
     }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
   };
 
   useEffect(() => {
@@ -94,12 +101,6 @@ function WebView() {
       return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
   
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      })
-    };
 
   return (
     <Stack alignItems="center">
@@ -589,82 +590,115 @@ function WebView() {
               <Typography fontSize="18px" fontWeight="400" color="#000000">We'll get in touch to start the grant application process for you.</Typography>
             </Stack>
           </Stack>
-          <Stack width="100%" flexDirection="row" gap="24px">
-            <Stack flex={1} p="24px" gap="24px" bgcolor="#FFF">
-              <Stack flex={1}>
-                <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
-                <Select value={solution} label="I would like to learn more about" onChange={(e)=> setSolution(e.target.value)}>
-                  <MenuItem value="emis">EMIS 360</MenuItem>
-                  <MenuItem value="althr">altHR</MenuItem>
-                  <MenuItem value="insuite">inSuite</MenuItem>
-                  <MenuItem value="omni">OMNI</MenuItem>
-                </Select>
-              </Stack>
-              <Stack flexDirection="row" gap="24px">
+          <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+
+            <Stack width="100%" flexDirection="row" gap="24px">
+              <Stack flex={1} p="24px" gap="24px" bgcolor="#FFF">
                 <Stack flex={1}>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
-                  <TextField label="Your Name" />
+                  <FormControl>
+                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
+                    <Select {...register("solution", {required: "Please select the solution"})} defaultValue="">
+                      <MenuItem value="emis">EMIS 360</MenuItem>
+                      <MenuItem value="althr">altHR</MenuItem>
+                      <MenuItem value="insuite">inSuite</MenuItem>
+                      <MenuItem value="omni">OMNI</MenuItem>
+                    </Select>
+                    <Typography fontSize="16px" fontWeight="400" color="error">
+                      {errors.solution?.message}
+                    </Typography>
+                  </FormControl>
+                </Stack>
+                <Stack flexDirection="row" gap="24px">
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
+                      <TextField {...register("fullName", {required: "Please fill in the field"})}/>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.fullName?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
+                      <TextField {...register("companyName", {required: "Please fill in the field"})} />
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.companyName?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                </Stack>
+                <Stack flexDirection="row" gap="24px">
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Email</Typography>
+                      <TextField type="email" {...register("email", {required: "Please fill in the field"})} />
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.email?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
+                      <TextField {...register("mobile", {required: "Please fill in the field", pattern: {value: /^[0-9]{10, 11}$/, message: "Please enter a valid number"}})}/>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.mobile?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
                 </Stack>
                 <Stack flex={1}>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
-                  <TextField label="Company Name"/>
+                  <FormControl>
+                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
+                    <Select {...register("orgSize", {required: "Please select the size"})} defaultValue="">
+                      <MenuItem value="10">10+</MenuItem>
+                      <MenuItem value="50">50+</MenuItem>
+                      <MenuItem value="100">100+</MenuItem>
+                      <MenuItem value="200">200+</MenuItem>
+                      <MenuItem value="300">Above 300</MenuItem>
+                    </Select>
+                    <Typography fontSize="16px" fontWeight="400" color="error">
+                      {errors.orgSize?.message}
+                    </Typography>
+                  </FormControl>
+                </Stack>
+                <Stack mt="44px">
+                  <Typography fontSize="14px" fontWeight="400" color="#858585">By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.</Typography>
+                </Stack>
+                <Stack alignItems="center">
+                  <Button variant="contained" type="submit" sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Submit</Button>
                 </Stack>
               </Stack>
-              <Stack flexDirection="row" gap="24px">
-                <Stack flex={1}>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Email</Typography>
-                  <TextField label="username@company.com" />
+              <Stack width="300px" height="100%" p="24px" bgcolor="#FFF1E7" borderRadius="16px" gap="8px">
+                <Typography fontSize="20px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">No prior Digitalisation Grant received</Typography>
                 </Stack>
-                <Stack flex={1}>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
-                  <TextField label="+60123456789" />
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">At least 60% Malaysian-owned</Typography>
                 </Stack>
-              </Stack>
-              <Stack flex={1}>
-                <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
-                <Select value={orgSize} label="Please select size of organisation" onChange={(e)=> setOrgSize(e.target.value)}>
-                  <MenuItem value="10">10+</MenuItem>
-                  <MenuItem value="50">50+</MenuItem>
-                  <MenuItem value="100">100+</MenuItem>
-                  <MenuItem value="200">200+</MenuItem>
-                  <MenuItem value="300">Above 300</MenuItem>
-                </Select>
-              </Stack>
-              <Stack mt="44px">
-                <Typography fontSize="14px" fontWeight="400" color="#858585">By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.</Typography>
-              </Stack>
-              <Stack alignItems="center">
-                <Button variant="contained"  sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Submit</Button>
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Registered with SSM, PBT, or SKM (for cooperatives)</Typography>
+                </Stack>
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Have been in operation for at least six (6) months</Typography>
+                </Stack>
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Minimum average annual sales turnover of at least RM50,000</Typography>
+                </Stack>
+                <Stack gap="8px" flexDirection="row" alignItems="center">
+                  <CheckCircle sx={{color: "#FA934E"}}/>
+                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Limited to one (1) application per business (but up to three types of digital services)</Typography>
+                </Stack>
               </Stack>
             </Stack>
-            <Stack width="300px" height="100%" p="24px" bgcolor="#FFF1E7" borderRadius="16px" gap="8px">
-              <Typography fontSize="20px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">No prior Digitalisation Grant received</Typography>
-              </Stack>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">At least 60% Malaysian-owned</Typography>
-              </Stack>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">Registered with SSM, PBT, or SKM (for cooperatives)</Typography>
-              </Stack>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">Have been in operation for at least six (6) months</Typography>
-              </Stack>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">Minimum average annual sales turnover of at least RM50,000</Typography>
-              </Stack>
-              <Stack gap="8px" flexDirection="row" alignItems="center">
-                <CheckCircle sx={{color: "#FA934E"}}/>
-                <Typography fontSize="14px" fontWeight="400" color="#11181C">Limited to one (1) application per business (but up to three types of digital services)</Typography>
-              </Stack>
-            </Stack>
-          </Stack>
+          </form>
         </Stack>
       </Stack>
       <FAQ view="web"/>

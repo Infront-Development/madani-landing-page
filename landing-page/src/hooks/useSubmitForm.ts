@@ -2,20 +2,20 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 interface IFormData {
-  solution: string,
-  fullName: string,
-  companyName: string,
+  "field[125]": string,
+  firstName: string,
+  customer_account: string,
   email: string,
-  mobile: string,
-  orgSize: string
+  phone: string,
+  "field[123]": string
 };
 const formDefaultValue = {
-    solution: "",
-    fullName: "",
-    companyName: "",
+    "field[125]": "",
+    firstName: "",
+    customer_account: "",
     email: "",
-    mobile: "",
-    orgSize: ""
+    phone: "",
+    "field[123]": ""
 }
 
 export const useSubmitForm = () => {

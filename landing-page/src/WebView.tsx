@@ -590,21 +590,21 @@ function WebView() {
               <Typography fontSize="18px" fontWeight="400" color="#000000">We'll get in touch to start the grant application process for you.</Typography>
             </Stack>
           </Stack>
-          <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-
+          <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_">
+          {/* <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_" onSubmit={handleSubmit((data) => onSubmit(data))}> */}
             <Stack width="100%" flexDirection="row" gap="24px">
               <Stack flex={1} p="24px" gap="24px" bgcolor="#FFF">
                 <Stack flex={1}>
                   <FormControl>
                     <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
-                    <Select {...register("solution", {required: "Please select the solution"})} defaultValue="">
+                    <Select {...register("field[125]", {required: "Please select the solution"})} defaultValue="">
                       <MenuItem value="emis">EMIS 360</MenuItem>
                       <MenuItem value="althr">altHR</MenuItem>
                       <MenuItem value="insuite">inSuite</MenuItem>
                       <MenuItem value="omni">OMNI</MenuItem>
                     </Select>
                     <Typography fontSize="16px" fontWeight="400" color="error">
-                      {errors.solution?.message}
+                      {errors["field[125]"]?.message}
                     </Typography>
                   </FormControl>
                 </Stack>
@@ -612,18 +612,18 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
-                      <TextField {...register("fullName", {required: "Please fill in the field"})}/>
+                      <TextField {...register("firstName", {required: "Please fill in the field"})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
-                        {errors.fullName?.message}
+                        {errors.firstName?.message}
                       </Typography>
                     </FormControl>
                   </Stack>
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
-                      <TextField {...register("companyName", {required: "Please fill in the field"})} />
+                      <TextField {...register("customer_account", {required: "Please fill in the field"})} />
                       <Typography fontSize="16px" fontWeight="400" color="error">
-                        {errors.companyName?.message}
+                        {errors.customer_account?.message}
                       </Typography>
                     </FormControl>
                   </Stack>
@@ -641,9 +641,9 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
-                      <TextField {...register("mobile", {required: "Please fill in the field", pattern: {value: /^[0-9]{10, 11}$/, message: "Please enter a valid number"}})}/>
+                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10,11}$/, message: "Please enter a valid number"}})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
-                        {errors.mobile?.message}
+                        {errors.phone?.message}
                       </Typography>
                     </FormControl>
                   </Stack>
@@ -651,7 +651,7 @@ function WebView() {
                 <Stack flex={1}>
                   <FormControl>
                     <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
-                    <Select {...register("orgSize", {required: "Please select the size"})} defaultValue="">
+                    <Select {...register("field[123]", {required: "Please select the size"})} defaultValue="">
                       <MenuItem value="10">10+</MenuItem>
                       <MenuItem value="50">50+</MenuItem>
                       <MenuItem value="100">100+</MenuItem>
@@ -659,7 +659,7 @@ function WebView() {
                       <MenuItem value="300">Above 300</MenuItem>
                     </Select>
                     <Typography fontSize="16px" fontWeight="400" color="error">
-                      {errors.orgSize?.message}
+                      {errors["field[123]"]?.message}
                     </Typography>
                   </FormControl>
                 </Stack>

@@ -9,6 +9,7 @@ import {
   MenuItem,
   Fab,
   Fade,
+  FormControl
 } from "@mui/material";
 import { 
   CheckCircle,
@@ -26,6 +27,7 @@ import {
 import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
+import { useSubmitForm } from "./hooks/useSubmitForm";
 
 import InfrontLogo from "./assets/images/Infront_Logo_With_CDB_Logo_1.png";
 import InfrontLogo2 from "./assets/images/Infront_Logo_With_CDB_Logo_2.png";
@@ -63,9 +65,8 @@ function MobileView() {
   const formRef = useRef<HTMLDivElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [solution, setSolution] = useState<string>("");
-  const [orgSize, setOrgSize] = useState<string>("");
   const [scrollToTopButton, setScrollToTopButton] = useState<boolean>(false);
+  const { register, errors} = useSubmitForm();
 
   const scrollTo = (
     ref: RefObject<HTMLDivElement | null>,
@@ -577,7 +578,7 @@ function MobileView() {
               <Typography mb="4px" fontSize="32px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
               <Typography fontSize="16px" fontWeight="400" color="#000" sx={{textAlign: "center"}}>Provide us your contact details below and find out if your business is eligible to claim up to RM5,000. We'll get in touch to start the grant application process for you.</Typography>
             </Stack>
-            <Stack px="24px" gap="24px">
+            <Stack px="24px" gap="24px" maxWidth="calc(100% - 48px)">
               <Stack p="24px" bgcolor="#FFF1E7" borderRadius="16px" gap="8px">
                 <Typography fontSize="20px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
                 <Stack gap="8px" flexDirection="row" alignItems="center">
@@ -605,67 +606,93 @@ function MobileView() {
                   <Typography fontSize="14px" fontWeight="400" color="#11181C">Limited to one (1) application per business (but up to three types of digital services)</Typography>
                 </Stack>
               </Stack>
-              <Stack p="24px" gap="24px" bgcolor="#FFF" borderRadius= "16px">
-                <Stack flex={1}>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
-                  <Select 
-                    value={solution} 
-                    displayEmpty
-                    onChange={(e)=> setSolution(e.target.value)}
-                    renderValue={(selected) => {
-                      if (selected === "") {
-                        return <Typography color="textSecondary">I would like to learn more about</Typography>
-                      }
-                      return selected;
-                    }}
-                  >
-                    <MenuItem value="emis">EMIS 360</MenuItem>
-                    <MenuItem value="althr">altHR</MenuItem>
-                    <MenuItem value="insuite">inSuite</MenuItem>
-                    <MenuItem value="omni">OMNI</MenuItem>
-                  </Select>
+              <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_" noValidate>
+                <input type="hidden" name="field[137]" value="" />
+                <input type="hidden" name="field[138]" value="" />
+                <input type="hidden" name="field[140]" value="" />
+                <input type="hidden" name="field[139]" value="" />
+                <input type="hidden" name="u" value="45" />
+                <input type="hidden" name="f" value="45" />
+                <input type="hidden" name="s" />
+                <input type="hidden" name="c" value="0" />
+                <input type="hidden" name="m" value="0" />
+                <input type="hidden" name="act" value="sub" />
+                <input type="hidden" name="v" value="2" />
+                <input type="hidden" name="or" value="81e6c037758fc9092efc15ead85ce839" />
+                <Stack p="24px" gap="24px" bgcolor="#FFF" borderRadius= "16px">
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
+                      <Select {...register("field[125]", {required: "Please select an option"})} defaultValue="">
+                        <MenuItem value="emis">EMIS 360</MenuItem>
+                        <MenuItem value="althr">altHR</MenuItem>
+                        <MenuItem value="insuite">inSuite</MenuItem>
+                        <MenuItem value="omni">OMNI</MenuItem>
+                      </Select>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors["field[125]"]?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
+                      <TextField {...register("firstName", {required: "Please fill in the field"})}/>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.firstName?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
+                      <TextField {...register("customer_account", {required: "Please fill in the field"})} />
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.customer_account?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Email</Typography>
+                      <TextField type="email" {...register("email", {required: "Please fill in the field"})} />
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.email?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
+                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10,11}$/, message: "Please enter a valid number"}})}/>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors.phone?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Stack flex={1}>
+                    <FormControl>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">How did you hear about us?</Typography>
+                      <Select {...register("field[123]", {required: "Please select an option"})} defaultValue="">
+                        <MenuItem value="CelcomDigi">CelcomDigi</MenuItem>
+                        <MenuItem value="Social Media (Facebook, Instagram, LinkedIn)">Social Media (Facebook, Instagram, LinkedIn)</MenuItem>
+                        <MenuItem value="Search Engine (Google, Bing, Yahoo, etc)">Search Engine (Google, Bing, Yahoo, etc)</MenuItem>
+                        <MenuItem value="Advertisement">Advertisement</MenuItem>
+                        <MenuItem value="Friends or Family">Friends or Family</MenuItem>
+                        <MenuItem value="Publication (News, Article, Blog)">Publication (News, Article, Blog)</MenuItem>
+                        <MenuItem value="Others">Others</MenuItem>
+                      </Select>
+                      <Typography fontSize="16px" fontWeight="400" color="error">
+                        {errors["field[123]"]?.message}
+                      </Typography>
+                    </FormControl>
+                  </Stack>
+                  <Typography fontSize="14px" fontWeight="400" color="#858585">By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.</Typography>
+                  <Stack alignItems="center">
+                    <Button variant="contained" type="submit" sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Submit</Button>
+                  </Stack>
                 </Stack>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
-                  <TextField label="Your Name" />
-                </Stack>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
-                  <TextField label="Company Name"/>
-                </Stack>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Email</Typography>
-                  <TextField label="username@company.com" />
-                </Stack>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
-                  <TextField label="+60123456789" />
-                </Stack>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
-                  <Select 
-                    value={orgSize} 
-                    displayEmpty
-                    onChange={(e)=> setOrgSize(e.target.value)}
-                    renderValue={(selected) => {
-                      if (selected === "") {
-                        return <Typography color="textSecondary">Please select size of organisation</Typography>
-                      }
-                      return selected;
-                    }}
-                  >
-                    <MenuItem value="10">10+</MenuItem>
-                    <MenuItem value="50">50+</MenuItem>
-                    <MenuItem value="100">100+</MenuItem>
-                    <MenuItem value="200">200+</MenuItem>
-                    <MenuItem value="300">Above 300</MenuItem>
-                  </Select>
-                </Stack>
-                <Typography fontSize="14px" fontWeight="400" color="#858585">By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.</Typography>
-                <Stack alignItems="center">
-                  <Button variant="contained"  sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Submit</Button>
-                </Stack>
-              </Stack>
+              </form>
             </Stack>
           </Stack>
         </Stack>

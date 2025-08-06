@@ -68,7 +68,7 @@ function WebView() {
   const stepByStepRef = useRef<HTMLDivElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
   const [scrollToTopButton, setScrollToTopButton] = useState<boolean>(false);
-  const { register, handleSubmit, onSubmit, errors } = useSubmitForm();
+  const { register, errors } = useSubmitForm();
   
   const scrollTo = (ref: RefObject<HTMLDivElement | null>) => {
     if (ref.current && ref.current !== null) {
@@ -590,14 +590,25 @@ function WebView() {
               <Typography fontSize="18px" fontWeight="400" color="#000000">We'll get in touch to start the grant application process for you.</Typography>
             </Stack>
           </Stack>
-          <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_">
-          {/* <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_" onSubmit={handleSubmit((data) => onSubmit(data))}> */}
+          <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_" >
+            <input type="hidden" name="field[137]" value="" />
+            <input type="hidden" name="field[138]" value="" />
+            <input type="hidden" name="field[140]" value="" />
+            <input type="hidden" name="field[139]" value="" />
+            <input type="hidden" name="u" value="45" />
+            <input type="hidden" name="f" value="45" />
+            <input type="hidden" name="s" />
+            <input type="hidden" name="c" value="0" />
+            <input type="hidden" name="m" value="0" />
+            <input type="hidden" name="act" value="sub" />
+            <input type="hidden" name="v" value="2" />
+            <input type="hidden" name="or" value="81e6c037758fc9092efc15ead85ce839" />
             <Stack width="100%" flexDirection="row" gap="24px">
               <Stack flex={1} p="24px" gap="24px" bgcolor="#FFF">
                 <Stack flex={1}>
                   <FormControl>
                     <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
-                    <Select {...register("field[125]", {required: "Please select the solution"})} defaultValue="">
+                    <Select {...register("field[125]", {required: "Please select an option"})} defaultValue="">
                       <MenuItem value="emis">EMIS 360</MenuItem>
                       <MenuItem value="althr">altHR</MenuItem>
                       <MenuItem value="insuite">inSuite</MenuItem>
@@ -650,13 +661,15 @@ function WebView() {
                 </Stack>
                 <Stack flex={1}>
                   <FormControl>
-                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Organisation Size</Typography>
-                    <Select {...register("field[123]", {required: "Please select the size"})} defaultValue="">
-                      <MenuItem value="10">10+</MenuItem>
-                      <MenuItem value="50">50+</MenuItem>
-                      <MenuItem value="100">100+</MenuItem>
-                      <MenuItem value="200">200+</MenuItem>
-                      <MenuItem value="300">Above 300</MenuItem>
+                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">How did you hear about us?</Typography>
+                    <Select {...register("field[123]", {required: "Please select an option"})} defaultValue="">
+                      <MenuItem value="CelcomDigi">CelcomDigi</MenuItem>
+                      <MenuItem value="Social Media (Facebook, Instagram, LinkedIn)">Social Media (Facebook, Instagram, LinkedIn)</MenuItem>
+                      <MenuItem value="Search Engine (Google, Bing, Yahoo, etc)">Search Engine (Google, Bing, Yahoo, etc)</MenuItem>
+                      <MenuItem value="Advertisement">Advertisement</MenuItem>
+                      <MenuItem value="Friends or Family">Friends or Family</MenuItem>
+                      <MenuItem value="Publication (News, Article, Blog)">Publication (News, Article, Blog)</MenuItem>
+                      <MenuItem value="Others">Others</MenuItem>
                     </Select>
                     <Typography fontSize="16px" fontWeight="400" color="error">
                       {errors["field[123]"]?.message}

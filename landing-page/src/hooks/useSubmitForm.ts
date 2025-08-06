@@ -28,6 +28,7 @@ export const useSubmitForm = () => {
         defaultValues: formDefaultValue,
     });
 
+    //Temporarily not used
     const onSubmit = async (data: IFormData) => {
         try {
             const response = await axios.post("https://infrontapac.activehosted.com/proc.php", data);

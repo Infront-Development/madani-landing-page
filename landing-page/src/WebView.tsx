@@ -30,23 +30,34 @@ import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
 import NavigateButton from "./components/NavigateButton";
-import { solutions, stepGuides, madaniInfo, eligibilityRequirement, textConst, buttonText, question6Options } from "./assets/text/text";
 import { useSubmitForm } from "./hooks/useSubmitForm";
-
-import InfrontLogo from "./assets/images/Infront_Logo_With_CDB_Logo_1.png";
-import InfrontLogo2 from "./assets/images/Infront_Logo_With_CDB_Logo_2.png";
-import mdeclogo from "./assets/images/mdeclogo.png";
-import bsnlogo from "./assets/images/bsnlogo.png";
-import madanilogo from "./assets/images/madanilogo.png";
-import mcmclogo from "./assets/images/mcmclogo.png";
-import Frame_4 from "./assets/images/Frame_4.png";
-import altHR from "./assets/images/altHR.svg";
-import headbackground from "./assets/images/headbackground.png";
-import madanibackground from "./assets/images/madanibackground.png";
-import altHR_banner from "./assets/images/altHR_banner.png";
-import EMIS360_banner from "./assets/images/EMIS360_banner.png";
-import OMNI_banner from "./assets/images/OMNI_banner.png";
-import inSuite_banner from "./assets/images/inSuite_banner.png";
+import { 
+  solutions, 
+  stepGuides, 
+  madaniInfo, 
+  eligibilityRequirement, 
+  textConst, 
+  buttonText, 
+  question6Options, 
+  errorText,
+  link,
+} from "./assets/text/text";
+import {
+   InfrontLogo,
+   InfrontLogo2,
+   mdeclogo,
+   bsnlogo,
+   madanilogo,
+   mcmclogo,
+   Frame_4,
+   altHR,
+   madanibackground,
+   altHR_banner,
+   EMIS360_banner,
+   OMNI_banner,
+   inSuite_banner,
+   headbackground,
+} from "./assets/images";
 
 const containerStyle = {
   width: "100%",
@@ -123,7 +134,7 @@ function WebView() {
       </Fade>
       <Stack sx={containerStyle} bgcolor="#FFF"  position="sticky" top={0} zIndex={100}>
         <Stack flex={1} p="16px 24px" width={fixWidth}>
-          <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px" onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} style={{cursor: "pointer"}}/>
+          <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px" onClick={()=> window.open(link.mainPage, "_blank")} style={{cursor: "pointer"}}/>
         </Stack>
         <Stack sx={containerStyle} bgcolor="#FE5000">
           <Stack p="8px" direction="row" alignItems="center" justifyContent="space-between" width={fixWidth}>
@@ -170,8 +181,8 @@ function WebView() {
             <Stack gap="16px">
               <Typography fontSize="20px" fontWeight="600" color="#11181C">{madaniInfo.subtitle}</Typography>
               <Stack gap="4px">
-                {madaniInfo.description.map(point => (
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
+                {madaniInfo.description.map((point, index) => (
+                  <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
                     <CheckCircle sx={{color: "#ED5F00"}}/>
                     <Typography fontSize="20px" fontWeight="400" color="#11181C">{point}</Typography>
                   </Stack>
@@ -289,7 +300,7 @@ function WebView() {
                   {solutions.emis.function.map((solution, index) => {
                     const firstSolution = index === 0;
                     return (
-                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                      <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
                         <CheckCircle sx={{color: "#FA934E"}} />
                         <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
                       </Stack>
@@ -313,7 +324,7 @@ function WebView() {
                   {solutions.althr.function.map((solution, index) => {
                     const firstSolution = index === 0;
                     return (
-                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                      <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
                         <CheckCircle sx={{color: "#FA934E"}} />
                         <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
                       </Stack>
@@ -337,7 +348,7 @@ function WebView() {
                   {solutions.insuite.function.map((solution, index) => {
                     const firstSolution = index === 0;
                     return (
-                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                      <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
                         <CheckCircle sx={{color: "#FA934E"}} />
                         <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
                       </Stack>
@@ -372,7 +383,7 @@ function WebView() {
                   {solutions.omni.function.map((solution, index) => {
                     const firstSolution = index === 0;
                     return (
-                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                      <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
                         <CheckCircle sx={{color: "#FA934E"}} />
                         <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
                       </Stack>
@@ -400,7 +411,7 @@ function WebView() {
             {Object.entries(stepGuides).slice(0, 3).map(([index, step]) => {
               const isFirst = index === "1";
               return (
-                <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
+                <Stack key={index} width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
                   <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
                     <Typography fontSize="16px" fontWeight="600" color="#FE5000">{step.step}</Typography>
                   </Stack>
@@ -409,8 +420,8 @@ function WebView() {
                     <Typography fontSize="16px" fontWeight="400" color="#11181C">{step.description[0]}</Typography>
                   :
                     <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                      {step.description.map(point => (
-                        <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
+                      {step.description.map((point, index) => (
+                        <ListItem key={index} sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
                           <Typography fontSize="16px" fontWeight="400" color="#11181C">{point}</Typography>
                         </ListItem>
                       ))}
@@ -424,14 +435,14 @@ function WebView() {
             {Object.entries(stepGuides).slice(3, 5).map(([index, step]) => {
               const isLast = index === "5";
               return (
-                <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
+                <Stack key={index} width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
                   <Stack p="2px 16px" mb="20px" border={isLast ? "1px solid" : ""} borderColor={isLast ? "#FE5000" : ""} bgcolor={isLast ? "" : "#FFF1E7"} borderRadius="300px" width="fit-content" alignItems="center">
                     <Typography fontSize="16px" fontWeight="600" color="#FE5000">{step.step}</Typography>
                   </Stack>
                   <Typography fontSize="20px" fontWeight="600" color="#00061D">{step.title}</Typography>
                   <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                    {step.description.map(point => (
-                      <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
+                    {step.description.map((point, index) => (
+                      <ListItem key={index} sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
                         <Typography fontSize="16px" fontWeight="400" color="#11181C">{point}</Typography>
                       </ListItem>
                     ))}
@@ -470,9 +481,9 @@ function WebView() {
                 <Stack flex={1}>
                   <FormControl>
                     <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question1}</Typography>
-                    <Select {...register("field[125]", {required: "Please select an option"})} defaultValue="">
+                    <Select {...register("field[125]", {required: errorText.selectField})} defaultValue="">
                       {Object.entries(solutions).map(([index, solution]) => (
-                        <MenuItem value={index}>{solution.title}</MenuItem>
+                        <MenuItem key={index} value={index}>{solution.title}</MenuItem>
                       ))
                       }
                     </Select>
@@ -485,7 +496,7 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question2}</Typography>
-                      <TextField {...register("firstName", {required: "Please fill in the field"})}/>
+                      <TextField {...register("firstName", {required: errorText.textField})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.firstName?.message}
                       </Typography>
@@ -494,7 +505,7 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question3}</Typography>
-                      <TextField {...register("customer_account", {required: "Please fill in the field"})} />
+                      <TextField {...register("customer_account", {required: errorText.textField})} />
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.customer_account?.message}
                       </Typography>
@@ -505,7 +516,7 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question4}</Typography>
-                      <TextField type="email" {...register("email", {required: "Please fill in the field"})} />
+                      <TextField type="email" {...register("email", {required: errorText.textField})} />
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.email?.message}
                       </Typography>
@@ -514,7 +525,7 @@ function WebView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question5}</Typography>
-                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10, 11}$/, message: "Please enter a valid number"}})}/>
+                      <TextField {...register("phone", {required: errorText.textField, pattern: {value: /^[0-9]{10, 11}$/, message: errorText.validNumber}})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.phone?.message}
                       </Typography>
@@ -524,9 +535,9 @@ function WebView() {
                 <Stack flex={1}>
                   <FormControl>
                     <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question6}</Typography>
-                    <Select {...register("field[123]", {required: "Please select an option"})} defaultValue="">
-                      {question6Options.map(option => (
-                        <MenuItem value={option}>{option}</MenuItem>
+                    <Select {...register("field[123]", {required: errorText.selectField})} defaultValue="">
+                      {question6Options.map((option, index) => (
+                        <MenuItem key={index} value={option}>{option}</MenuItem>
                       ))}
                     </Select>
                     <Typography fontSize="16px" fontWeight="400" color="error">
@@ -543,8 +554,8 @@ function WebView() {
               </Stack>
               <Stack width="300px" height="100%" p="24px" bgcolor="#FFF1E7" borderRadius="16px" gap="8px">
                 <Typography fontSize="20px" fontWeight="600" color="#FE5000">{textConst.checkEligibility}</Typography>
-                {eligibilityRequirement.map(point => (
-                  <Stack gap="8px" flexDirection="row" alignItems="center">
+                {eligibilityRequirement.map((point, index) => (
+                  <Stack key={index} gap="8px" flexDirection="row" alignItems="center">
                     <CheckCircle sx={{color: "#FA934E"}}/>
                     <Typography fontSize="14px" fontWeight="400" color="#11181C">{point}</Typography>
                   </Stack>
@@ -559,14 +570,14 @@ function WebView() {
         <Stack width={fixWidth} flexDirection="row" justifyContent="space-between">
           <Stack gap="33px">
             <Stack gap="6px" width="331px">
-              <img src={InfrontLogo2} alt="infront-logo" width="229px" height="121px"  onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} style={{cursor: "pointer"}}/>
+              <img src={InfrontLogo2} alt="infront-logo" width="229px" height="121px"  onClick={()=> window.open(link.mainPage, "_blank")} style={{cursor: "pointer"}}/>
               <Typography fontSize="16px" fontWeight="600" color="#D7DBDF">{textConst.vision}</Typography>
             </Stack>
             <Stack gap="29px" flexDirection="row">
-              <Facebook onClick={()=> window.open("https://www.facebook.com/infrontasiapacific/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}}/>
-              <LinkedIn onClick={()=> window.open("https://www.linkedin.com/company/infrontapac/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
-              <Instagram onClick={()=> window.open("https://www.instagram.com/infront.apac/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
-              <Language onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
+              <Facebook onClick={()=> window.open(link.facebook, "_blank")} sx={{color: "#FFF", cursor: "pointer"}}/>
+              <LinkedIn onClick={()=> window.open(link.linkedin, "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
+              <Instagram onClick={()=> window.open(link.instagram, "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
+              <Language onClick={()=> window.open(link.mainPage, "_blank")} sx={{color: "#FFF", cursor: "pointer"}} />
             </Stack>
           </Stack>
           <Stack justifyContent="center" alignItems="end" gap="16px">

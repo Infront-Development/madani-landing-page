@@ -167,7 +167,8 @@ export const buttonText = {
   getOffer: "Get Offer",
   skipSection: "Skip Section",
   freeConsultation: "Free Consultation",
-  submit: "Submit"
+  submit: "Submit",
+  applyNow: "Apply Now",
 };
 
 export const question6Options = [
@@ -179,3 +180,16 @@ export const question6Options = [
   "Publication (News, Article, Blog)",
   "Others",
 ];
+
+export const errorText = {
+  selectField: "Please select an option",
+  textField: "Please fill in the field",
+  validNumber: "Please enter a valid number",
+};
+
+export const link = {
+  mainPage: "https://infrontconsulting.asia/",
+  facebook: "https://www.facebook.com/infrontasiapacific/",
+  linkedin: "https://www.linkedin.com/company/infrontapac/",
+  instagram: "https://www.instagram.com/infront.apac/",
+}

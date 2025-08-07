@@ -8,6 +8,7 @@ interface IButton {
     icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
     borderRadius?: string;
     fullWidth?: boolean;
+    p?: string;
 }
 
 export const NavigateButton = (props: IButton) => {
@@ -17,7 +18,8 @@ export const NavigateButton = (props: IButton) => {
         function: onClick, 
         icon: IconComponent, 
         borderRadius, 
-        fullWidth 
+        fullWidth,
+        p,
     } = props;
     const isContained = type === "contained";
 
@@ -27,7 +29,7 @@ export const NavigateButton = (props: IButton) => {
             endIcon={IconComponent ? <IconComponent /> : undefined}
             variant={type}
             sx={{
-                px: "24px",
+                p: p ?? "8px 24px",
                 bgcolor: isContained ? "#FE5000" : "#FBFCFD", 
                 color: isContained ? "#FBFCFD" : "#FE5000", 
                 borderColor: isContained ? "" : "#FE5000", 
@@ -36,9 +38,8 @@ export const NavigateButton = (props: IButton) => {
                 fontSize:"20px", 
                 fontWeight:"600", 
                 borderRadius: borderRadius ?? "16px", 
-                width: "fit-content" 
+                width: fullWidth ? "100%" : "fit-content",
             }} 
-            fullWidth={fullWidth}
         >
             {text}
         </Button>

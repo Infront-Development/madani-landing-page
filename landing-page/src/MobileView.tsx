@@ -7,8 +7,6 @@ import {
   Select,
   TextField,
   MenuItem,
-  Fab,
-  Fade,
   FormControl
 } from "@mui/material";
 import { 
@@ -22,13 +20,16 @@ import {
   Phone,
   Email,
   AutoAwesome,
-  VerticalAlignTop,
 } from "@mui/icons-material";
 import { useRef, useState, useEffect, RefObject } from "react";
-import SampleProjectImages from './components/SampleProjectImages';
-import FAQ from "./components/FAQ";
-import NavigateButton from "./components/NavigateButton";
 import { useSubmitForm } from "./hooks/useSubmitForm";
+
+import { 
+  SampleProjectImages,
+  FAQ,
+  NavigateButton,
+  ScrollToTopButton,
+} from  "./components";
 import { 
   solutions, 
   stepGuides, 
@@ -134,22 +135,7 @@ function MobileView() {
 
   return (
     <Stack alignItems="center">
-        <Fade in={scrollToTopButton}  timeout={300}>
-            <Fab 
-              onClick={scrollToTop} 
-              sx={{
-                position: "fixed", 
-                bottom: 24, 
-                right: 24, 
-                display: scrollToTopButton ? "block" : "hidden",
-                alignItems: "center",
-                bgcolor: "#FE5000",
-                ":hover": {background: "#FE5000"}
-              }}
-            >
-              <VerticalAlignTop sx={{mt: "8px", color: "#FFF"}} />
-            </Fab>
-        </Fade>
+        <ScrollToTopButton function={scrollToTop} scrollToTopButton={scrollToTopButton} />
         <Stack sx={containerStyle}>
           <Stack sx={pContent}>
               <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px" onClick={()=> window.open(link.mainPage, "_blank")}/>

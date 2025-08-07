@@ -8,8 +8,6 @@ import {
   Select,
   TextField,
   MenuItem,
-  Fade,
-  Fab,
   FormControl
 } from "@mui/material";
 import { 
@@ -24,13 +22,16 @@ import {
   Phone,
   Email,
   AutoAwesome,
-  VerticalAlignTop,
 } from "@mui/icons-material";
 import { useRef, useState, useEffect, RefObject } from "react";
-import SampleProjectImages from './components/SampleProjectImages';
-import FAQ from "./components/FAQ";
-import NavigateButton from "./components/NavigateButton";
 import { useSubmitForm } from "./hooks/useSubmitForm";
+
+import { 
+  SampleProjectImages,
+  FAQ,
+  NavigateButton,
+  ScrollToTopButton,
+} from  "./components";
 import { 
   solutions, 
   stepGuides, 
@@ -116,22 +117,7 @@ function WebView() {
 
   return (
     <Stack alignItems="center">
-      <Fade in={scrollToTopButton}  timeout={300}>
-        <Fab 
-          onClick={scrollToTop} 
-          sx={{
-            position: "fixed", 
-            bottom: 24, 
-            right: 24, 
-            display: scrollToTopButton ? "block" : "hidden",
-            alignItems: "center",
-            bgcolor: "#FE5000",
-            ":hover": {bgcolor: "#ED5F00"}
-          }}
-        >
-          <VerticalAlignTop sx={{mt: "8px", color: "#FFF"}} />
-        </Fab>
-      </Fade>
+      <ScrollToTopButton function={scrollToTop} scrollToTopButton={scrollToTopButton} />
       <Stack sx={containerStyle} bgcolor="#FFF"  position="sticky" top={0} zIndex={100}>
         <Stack flex={1} p="16px 24px" width={fixWidth}>
           <img src={InfrontLogo} alt="Infront logo" width="122px" height="64px" onClick={()=> window.open(link.mainPage, "_blank")} style={{cursor: "pointer"}}/>

@@ -29,6 +29,7 @@ import {
 import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
+import NavigateButton from "./components/NavigateButton";
 import { useSubmitForm } from "./hooks/useSubmitForm";
 
 import InfrontLogo from "./assets/images/Infront_Logo_With_CDB_Logo_1.png";
@@ -58,6 +59,173 @@ const buttonStyle = {
   boxShadow: "none",
   borderRadius: "16px"
 }
+
+const solutions = {
+  emis: {
+    title: "EMIS 360",
+    subtitle: "Simplified e-Invoicing solution for your business",
+    function: [
+      "24/7 Local Support Team",
+      "Dashboard & Analytics",
+      "Seamless ERP Integration",
+      "Batch Invoice Processing",
+      "Export Reports",
+      "Full Compliance with LHDN",
+    ],
+  },
+  althr: {
+    title: "altHR",
+    subtitle: "All-in-one HR app for happy teams",
+    function: [
+      "Easy Leave Application & Approval",
+      "Staff Directory in One Place",
+      "E-Payslips",
+      "Smart Attendance Tracking",
+      "Share Policies Instantly",
+    ],
+  },
+  insuite: {
+    title: "inSuite",
+    subtitle: "Optimize with productivity tools & cybersecurity",
+    function: [
+      "24/7 Managed Service Team",
+      "Microsoft 365 Tools + Google Workspace",
+      "IT Support & Setup",
+      "Proactive Monitoring",
+      "Data Backup & Protection",
+    ],
+  },
+  omni: {
+    title: "OMNI",
+    subtitle: "Unify your calls, chats & meetings in the cloud",
+    function: [
+      "Unlimited Incoming Calls",
+      "1x Business DID Number",
+      "Comprehensive Call Recording",
+      "AI Driven Transcription & Analytics",
+      "Security & Remote Access",
+      "System Report",
+    ],
+  },
+};
+const stepGuides = {
+  1: {
+    step: "Step 1",
+    title: "Quotation Request",
+    description: [
+      "Applicants contact Infront Consulting to get a quotation for up to 3 services."
+    ],
+  },
+  2: {
+    step: "Step 2",
+    title: "Submit Application",
+    description: [
+      "Applicants share the required documents with our Sales Representative.", 
+      "We'll take care of the rest and submit the application for you.",
+    ],
+  },
+  3: {
+    step: "Step 3",
+    title: "Confirmation & Payment",
+    description: [
+      "Applicants will receive an email if successful.",
+      "Applicants must pay the remaining balance (after deducting the grant amount) within 14 days.",
+      "Payment is made through a unique payment link sent via email.",
+      "Failure to make payment on time will result in the cancellation of the grant.",
+    ],
+  },
+  4: {
+    step: "Step 4",
+    title: "Service Delivery & Grant Disbursement",
+    description: [
+      "Infront Consulting delivers the service.",
+      "BSN will disburse 50% (up to RM5,000) directly to Infront Consulting in stages.",
+    ],
+  },
+  5: {
+    step: "Note",
+    title: "Take Note",
+    description: [
+      "Keep proof of service activation as BSN may request it.",
+      "If requirements aren't followed, your business may be blacklisted in the future.",
+    ],
+  },
+  
+};
+const madaniInfo = {
+  title: "Madani PMKS Digital Grant",
+  subtitle: "The Madani PMKS Digital Grant is a government grant to help Malaysian micro, small, and medium enterprises (PMKS) use digital solutions to improve their business.",
+  description: [
+    "50% matching grant or up to RM5,000 per company.",
+    "Managed by: Ministry of Finance, BSN, MDEC & MCMC.",
+  ]
+};
+const eligibilityRequirement = [
+  "No prior Digitalisation Grant received",
+  "At least 60% Malaysian-owned",
+  "Registered with SSM, PBT, or SKM (for cooperatives)",
+  "Have been in operation for at least six (6) months",
+  "Minimum average annual sales turnover of at least RM50,000",
+  "Limited to one (1) application per business (but up to three types of digital services)",
+];
+const textConst = {
+  applicationOpen: "APPLICATIONS NOW OPEN! Limited Slot Available",
+  digitaliseBusiness: "Digitalise your business",
+  withUpTo: "with up to",
+  rm5k: "RM5000",
+  grant: "Grant",
+  kickstart: "Kickstart Your Digital Journey",
+  with: "with",
+  infront: "Infront Consulting",
+  officiallyAppointed: "Officially appointed as a trusted Digitalisation Partner",
+  "50%Grant": "50% Grant",
+  initiative: "An Initiative Under",
+  capped: "Capped at RM5,000",
+  startingFrom: "Starting From",
+  rm8: "RM8",
+  monthlyUser: "monthly /user",
+  solutions: "Solutions",
+  coreFunction: "Core Function",
+  addOn: "Add-On Available",
+  microsoftDefender: "Microsoft Defender Add-On",
+  aiPowered: "AI-Powered",
+  stepByStep: "Step-by-Step Guide",
+  to: "to",
+  gettingSolution: "Getting Our Solutions",
+  checkEligibility: "Check Your Eligibility",
+  eligibilityDescription: "Provide us your contact details below and find out if your business is eligible to claim up to RM5,000.",
+  eligibilityDescription1: "We'll get in touch to start the grant application process for you.",
+  question1: "What solution are you looking for?",
+  question2: "Full Name (as per I/C or passport)",
+  question3: "Company Name",
+  question4: "Company Email",
+  question5: "Mobile Number",
+  question6: "How did you hear about us?",
+  declaration: `By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.`,
+  vision: "Improving the lives of organisations through the power of technology",
+  contactUs: "Contact Us",
+  phone: "+ 03 7957 7228",
+  email: "my.info@infrontconsulting.com.my"
+};
+const buttonText = {
+  earlyApplicant: "Be an Early Applicant",
+  goDigital: "Go Digital Now",
+  browseProduct: "Browse Product",
+  moreDetails: "More Details",
+  getOffer: "Get Offer",
+  skipSection: "Skip Section",
+  freeConsultation: "Free Consultation",
+  submit: "Submit"
+};
+const question6Options = [
+  "CelcomDigi",
+  "Social Media (Facebook, Instagram, LinkedIn)",
+  "Search Engine (Google, Bing, Yahoo, etc)",
+  "Advertisement",
+  "Friends or Family",
+  "Publication (News, Article, Blog)",
+  "Others",
+];
 
 function WebView() {
   const emisRef = useRef<HTMLDivElement>(null);
@@ -89,18 +257,17 @@ function WebView() {
   };
 
   useEffect(() => {
-      const toggleVisibility = () => {
-        if ( window.pageYOffset > 100) {
-          setScrollToTopButton(true);
-        } else {
-          setScrollToTopButton(false);
-        }
-      };
-  
-      window.addEventListener("scroll", toggleVisibility);
-      return () => window.removeEventListener("scroll", toggleVisibility);
-    }, []);
-  
+    const toggleVisibility = () => {
+      if ( window.pageYOffset > 100) {
+        setScrollToTopButton(true);
+      } else {
+        setScrollToTopButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);    
 
   return (
     <Stack alignItems="center">
@@ -126,26 +293,26 @@ function WebView() {
         </Stack>
         <Stack sx={containerStyle} bgcolor="#FE5000">
           <Stack p="8px" direction="row" alignItems="center" justifyContent="space-between" width={fixWidth}>
-            <Typography fontSize="18px" fontWeight="600" color="#FBFCFD">APPLICATIONS NOW OPEN! Limited Slot Available</Typography>
-            <Button variant="contained" sx={{...buttonStyle, py: "2px", bgcolor: "#FFF", fontSize:"16px", fontWeight:"600", color:"#000"}} onClick={()=> scrollTo(formRef)}>Be an Early Applicant</Button>
+            <Typography fontSize="18px" fontWeight="600" color="#FBFCFD">{textConst.applicationOpen}</Typography>
+            <Button variant="contained" sx={{...buttonStyle, py: "2px", bgcolor: "#FFF", fontSize:"16px", fontWeight:"600", color:"#000"}} onClick={()=> scrollTo(formRef)}>{buttonText.earlyApplicant}</Button>
           </Stack>
         </Stack>
       </Stack>
       <Stack py="40px" sx={{...containerStyle, background: `linear-gradient(180deg, rgba(253, 233, 225, 0.40) 0%, rgba(252, 229, 240, 0.40) 100%), url(${headbackground}) lightgray 50% / cover no-repeat`}} >
         <Stack width={fixWidth} flexDirection="row" justifyContent="center">
           <Stack flex={1}>
-            <Typography fontSize="32px" fontWeight="600" color="#000000">Digitalise your business</Typography>
-            <Typography fontSize="24px" fontWeight="600" color="#7E868C">with up to</Typography>
+            <Typography fontSize="32px" fontWeight="600" color="#000000">{textConst.digitaliseBusiness}</Typography>
+            <Typography fontSize="24px" fontWeight="600" color="#7E868C">{textConst.withUpTo}</Typography>
             <Stack flexDirection="row" alignItems="center" gap="16px">
-              <Typography fontSize="64px" fontWeight="600" color="#FE5000">RM5000 </Typography>
-              <Typography mt="12px" fontSize="48px" fontWeight="600" color="#000000">Grant</Typography>
+              <Typography fontSize="64px" fontWeight="600" color="#FE5000">{textConst.rm5k}</Typography>
+              <Typography mt="12px" fontSize="48px" fontWeight="600" color="#000000">{textConst.grant}</Typography>
             </Stack>
             <Stack my="16px" flexDirection="row" alignItems="center" gap="12px">
-              <Button variant="contained" sx={{...buttonStyle, px: "px", bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }} onClick={()=> scrollTo(formRef)}>Go Digital Now</Button>
-              <Button variant="outlined" sx={{...buttonStyle, px: "24px", bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}} onClick={()=> scrollTo(solutionRef)}>Browse Product</Button>
+              <NavigateButton text={buttonText.goDigital} function={()=>scrollTo(formRef)} type="contained"/>
+              <NavigateButton text={buttonText.browseProduct} function={()=> scrollTo(solutionRef)} type="outlined"/>
             </Stack>
             <Stack p="16px 24px" gap="8px" borderRadius="16px" sx={{background: "linear-gradient(90deg, rgba(249, 249, 249, 0.40) 0%, rgba(253, 253, 253, 0.40) 100%)"}}>
-              <Typography fontSize="12px" fontWeight="400" color="#687076">An Initiative Under</Typography>
+              <Typography fontSize="12px" fontWeight="400" color="#687076">{textConst.initiative}</Typography>
               <Stack display="flex" flexDirection="row" gap="4px">
                 <img src={madanilogo} alt="madani" width="64px" height="24px" />
                 <img src={bsnlogo} alt="bsn" width="64px" height="24px" />
@@ -165,18 +332,16 @@ function WebView() {
             <img src={madanilogo} alt="madani" width="240px" height="92px" />
           </Stack>
           <Stack gap="24px" width="637px">
-            <Typography fontSize="48px" fontWeight="600" color="#00254D">Madani PMKS Digital Grant</Typography>
+            <Typography fontSize="48px" fontWeight="600" color="#00254D">{madaniInfo.title}</Typography>
             <Stack gap="16px">
-              <Typography fontSize="20px" fontWeight="600" color="#11181C">The Madani PMKS Digital Grant is a government grant to help Malaysian micro, small, and medium enterprises (PMKS) use digital solutions to improve their business. </Typography>
+              <Typography fontSize="20px" fontWeight="600" color="#11181C">{madaniInfo.subtitle}</Typography>
               <Stack gap="4px">
-                <Stack flexDirection="row" gap="4px" alignItems="center">
-                  <CheckCircle sx={{color: "#ED5F00"}}/>
-                  <Typography fontSize="20px" fontWeight="400" color="#11181C">50% matching grant or up to RM5,000 per company.</Typography>
-                </Stack>
-                <Stack flexDirection="row" gap="4px" alignItems="center">
-                  <CheckCircle sx={{color: "#ED5F00"}}/>
-                  <Typography fontSize="20px" fontWeight="400" color="#11181C">Managed by: Ministry of Finance, BSN, MDEC & MCMC.</Typography>
-                </Stack>
+                {madaniInfo.description.map(point => (
+                  <Stack flexDirection="row" gap="4px" alignItems="center">
+                    <CheckCircle sx={{color: "#ED5F00"}}/>
+                    <Typography fontSize="20px" fontWeight="400" color="#11181C">{point}</Typography>
+                  </Stack>
+                ))}
               </Stack>
             </Stack>
           </Stack>
@@ -185,148 +350,119 @@ function WebView() {
       <Stack ref={solutionRef} py="80px" sx={{...containerStyle, background: "linear-gradient(0deg, rgba(255, 255, 255, 0.00) 51.62%, #FFF8F9 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.00) 57.5%, #FFF 100%), var(--Grays-Slate-4, #ECEEF0)"}}>
         <Stack width={fixWidth} alignItems="center">
           <Stack alignItems="center" mb="40px">
-            <Typography fontSize="32px" fontWeight="600" color="#000000">Kickstart Your Digital Journey</Typography>
-            <Typography fontSize="24px" fontWeight="500" color="#7E868C">with</Typography>
-            <Typography mt="-8px" fontSize="48px" fontWeight="600" color="#FE5000">Infront Consulting</Typography>
-            <Typography mt="16px" fontSize="20px" fontWeight="600" color="#687076">Officially appointed as a trusted Digitalisation Partner</Typography>
+            <Typography fontSize="32px" fontWeight="600" color="#000000">{textConst.kickstart}</Typography>
+            <Typography fontSize="24px" fontWeight="500" color="#7E868C">{textConst.with}</Typography>
+            <Typography mt="-8px" fontSize="48px" fontWeight="600" color="#FE5000">{textConst.infront}</Typography>
+            <Typography mt="16px" fontSize="20px" fontWeight="600" color="#687076">{textConst.officiallyAppointed}</Typography>
           </Stack>
           <Stack width="100%" gap="24px">
             <Stack gap="24px" flexDirection="row">
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${EMIS360_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color="#11181C">EMIS 360</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                  <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.emis.title}</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.emis.subtitle}</Typography>
                 </Stack>
                 <Stack flexDirection="row" gap="12px">
-                  <Button variant="outlined" sx={{...buttonStyle, bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}} onClick={()=> scrollTo(emisRef)}>More Details</Button>
-                  <Button variant="contained" sx={{...buttonStyle, bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD", borderRadius: "300px" }} endIcon={<East />} onClick={()=> scrollTo(formRef)}>Get Offer</Button>
+                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(emisRef)} type="outlined"/>
+                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
                 </Stack>
               </Stack>
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${altHR_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
                   <Stack my="8px">
                     <img src={altHR} alt="alt" width="166px" height="32px"/>
                   </Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business.</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.althr.subtitle}</Typography>
                 </Stack>
                 <Stack flexDirection="row" gap="12px">
-                  <Button variant="outlined" sx={{...buttonStyle, bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}}  onClick={()=> scrollTo(altHrRef)}>More Details</Button>
-                  <Button variant="contained" sx={{...buttonStyle, bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD", borderRadius: "300px" }} endIcon={<East />}  onClick={()=> scrollTo(formRef)}>Get Offer</Button>
+                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(altHrRef)} type="outlined" />
+                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
                 </Stack>
               </Stack>
             </Stack>
             <Stack gap="24px" flexDirection="row">
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${inSuite_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color="#11181C">inSuite</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Optimize with productivity tools & cybersecurity</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                  <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.insuite.title}</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.insuite.subtitle}</Typography>
                 </Stack>
                 <Stack flexDirection="row" gap="12px">
-                  <Button variant="outlined" sx={{...buttonStyle, bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}}  onClick={()=> scrollTo(inSuiteRef)}>More Details</Button>
-                  <Button variant="contained" sx={{...buttonStyle, bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD", borderRadius: "300px" }} endIcon={<East />} onClick={()=> scrollTo(formRef)}>Get Offer</Button>
+                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(inSuiteRef)} type="outlined" />
+                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
                 </Stack>
               </Stack>
               <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${OMNI_banner}) lightgray 50% / cover no-repeat`}}>
                 <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color="#11181C">OMNI</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Unify your calls, chats & meetings in the cloud</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                  <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.omni.title}</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.omni.subtitle}</Typography>
                 </Stack>
                 <Stack flexDirection="row" gap="12px">
-                  <Button variant="outlined" sx={{...buttonStyle, bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}}  onClick={()=> scrollTo(omniRef)}>More Details</Button>
-                  <Button variant="contained" sx={{...buttonStyle, bgcolor: "#FE5000", fontSize:"20px", fontWeight:"600", color:"#FBFCFD", borderRadius: "300px" }} endIcon={<East />} onClick={()=> scrollTo(formRef)}>Get Offer</Button>
+                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(omniRef)} type="outlined" />
+                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
                 </Stack>
               </Stack>
             </Stack>
             <Stack alignItems="center" mb="40px">
-              <Typography fontSize="18px" fontWeight="400" color="#687076">Capped at RM5,000</Typography>
+              <Typography fontSize="18px" fontWeight="400" color="#687076">{textConst.capped}</Typography>
             </Stack>
           </Stack>
           <Stack my="40px" flexDirection="row" alignItems="center">
-            <Typography fontSize="32px" fontWeight="500" color="#687076">Starting from</Typography>
-            <Typography ml="6px" fontSize="32px" fontWeight="500" color="#FE5000">RM8</Typography>
-            <Typography mt="8px" ml="6px" fontSize="20px" fontWeight="500" color="#687076">monthly /user</Typography>
+            <Typography fontSize="32px" fontWeight="500" color="#687076">{textConst.startingFrom}</Typography>
+            <Typography ml="6px" fontSize="32px" fontWeight="500" color="#FE5000">{textConst.rm8}</Typography>
+            <Typography mt="8px" ml="6px" fontSize="20px" fontWeight="500" color="#687076">{textConst.monthlyUser}</Typography>
           </Stack>
         </Stack>
       </Stack>
       <Stack pt="32px" width={fixWidth} flexDirection="row">
         <Stack mx="24px" gap="24px" sx={{position: "sticky", top: 0}}>
-          <Typography fontSize="18px" fontWeight="500" color="#678076">Solutions</Typography>
+          <Typography fontSize="18px" fontWeight="500" color="#678076">{textConst.solutions}</Typography>
           <Stack gap="24px">
             <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(emisRef)}>
               <Stack borderRadius="16px" bgcolor="#FE5000" width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#FE5000">EMIS 360</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#FE5000">{solutions.emis.title}</Typography>
             </Stack>
             <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(altHrRef)}>
               <Stack borderRadius="16px" bgcolor="#DFE3E6" width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#11181C">altHR</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#11181C">{solutions.althr.title}</Typography>
             </Stack>
             <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(inSuiteRef)}>
               <Stack borderRadius="16px" bgcolor="#DFE3E6" width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#11181C">inSuite</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#11181C">{solutions.insuite.title}</Typography>
             </Stack>
             <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(omniRef)}>
               <Stack borderRadius="16px" bgcolor="#DFE3E6" width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#11181C">OMNI</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#11181C">{solutions.omni.title}</Typography>
             </Stack>
           </Stack>
           <Stack flexDirection="row" alignItems="center" sx={{cursor: "pointer"}} onClick={()=> scrollTo(stepByStepRef)}>
             <KeyboardArrowDown sx={{color: "#ED5F00" }}/>
-            <Typography fontSize="14px" fontWeight="600" color="#FE5000">Skip Section</Typography>
+            <Typography fontSize="14px" fontWeight="600" color="#FE5000">{buttonText.skipSection}</Typography>
           </Stack>
         </Stack>
         <Stack flexDirection="column">
           <Stack ref={emisRef} py="40px" gap="16px" flexDirection="row">
             <SampleProjectImages solution="emis" view="web"/>
             <Stack>
-              <Typography fontSize="24px" fontWeight="600" color="#000000">EMIS 360</Typography>
-              <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#000000">{solutions.emis.title}</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.emis.subtitle}</Typography>
               <Stack py="16px" gap="16px">
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                 <Stack gap="8px">
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="600" color="#FF7536">24/7 Local Support Team</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Dashboard & Analytics</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Seamless ERP Integration</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Batch Invoice Processing</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Export Reports</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Full Compliance with LHDN</Typography>
-                  </Stack>
+                  {solutions.emis.function.map((solution, index) => {
+                    const firstSolution = index === 0;
+                    return (
+                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                        <CheckCircle sx={{color: "#FA934E"}} />
+                        <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
+                      </Stack>
+                    );
+                  })}
                 </Stack>
-                <Button 
-                  variant="contained" 
-                  sx={{...buttonStyle,
-                    bgcolor: "#FE5000", 
-                    fontSize:"20px", 
-                    fontWeight:"600", 
-                    color:"#FBFCFD", 
-                    borderRadius: "300px", 
-                    width: "fit-content" 
-                  }} 
-                  endIcon={<East />} 
-                  onClick={()=> scrollTo(formRef)}
-                >
-                  Free Consultation
-                </Button>
+                <NavigateButton text={buttonText.freeConsultation} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
               </Stack>
             </Stack>
           </Stack>
@@ -336,46 +472,21 @@ function WebView() {
               <Stack my="8px">
                 <img src={altHR} alt="alt" width="125px" height="24px"/>
               </Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#687076">All-in-one HR app for happy teams</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.althr.subtitle}</Typography>
               <Stack py="16px" gap="16px">
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                 <Stack gap="8px">
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="600" color="#FF7536">Easy Leave Application & Approval</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Staff Directory in One Place</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">E-Payslips</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Smart Attendance Tracking</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Share Policies Instantly</Typography>
-                  </Stack>
+                  {solutions.althr.function.map((solution, index) => {
+                    const firstSolution = index === 0;
+                    return (
+                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                        <CheckCircle sx={{color: "#FA934E"}} />
+                        <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
+                      </Stack>
+                    );
+                  })}
                 </Stack>
-                <Button 
-                  variant="contained" 
-                  sx={{...buttonStyle,
-                    bgcolor: "#FE5000", 
-                    fontSize:"20px", 
-                    fontWeight:"600", 
-                    color:"#FBFCFD", 
-                    borderRadius: "300px", 
-                    width: "fit-content" 
-                  }} 
-                  endIcon={<East />} 
-                  onClick={()=> scrollTo(formRef)}
-                >
-                  Free Consultation
-                </Button>
+                <NavigateButton text={buttonText.freeConsultation} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
               </Stack>
             </Stack>
             <SampleProjectImages solution="althr" view="web"/>
@@ -384,54 +495,29 @@ function WebView() {
           <Stack ref={inSuiteRef} py="40px" gap="16px" flexDirection="row">
             <SampleProjectImages solution="insuite" view="web"/>
             <Stack>
-              <Typography fontSize="24px" fontWeight="600" color="#000000">inSuite</Typography>
-              <Typography fontSize="16px" fontWeight="600" color="#687076">Optimize with productivity tools & cybersecurity</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#000000">{solutions.insuite.title}</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.insuite.subtitle}</Typography>
               <Stack py="16px" gap="16px">
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                 <Stack gap="8px">
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="600" color="#FF7536">24/7 Managed Service Team</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Microsoft 365 Tools + Google Workspace</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">IT Support & Setup</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Proactive Monitoring</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Data Backup & Protection</Typography>
-                  </Stack>
+                  {solutions.insuite.function.map((solution, index) => {
+                    const firstSolution = index === 0;
+                    return (
+                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                        <CheckCircle sx={{color: "#FA934E"}} />
+                        <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
+                      </Stack>
+                    );
+                  })}
                 </Stack>
                 <Stack mt="8px">
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Add-On Available</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.addOn}</Typography>
                   <Stack mt="16px" flexDirection="row" gap="4px">
                     <AddCircle sx={{color: "#0081F1"}}/>
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Microsoft Defender Add-On</Typography>
+                    <Typography fontSize="14px" fontWeight="400" color="#11181C">{textConst.microsoftDefender}</Typography>
                   </Stack>
                 </Stack>
-                <Button 
-                  variant="contained" 
-                  sx={{...buttonStyle,
-                    bgcolor: "#FE5000", 
-                    fontSize:"20px", 
-                    fontWeight:"600", 
-                    color:"#FBFCFD", 
-                    borderRadius: "300px", 
-                    width: "fit-content" 
-                  }} 
-                  endIcon={<East />} 
-                  onClick={()=> scrollTo(formRef)}
-                >
-                  Free Consultation
-                </Button>
+                <NavigateButton text={buttonText.freeConsultation} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
               </Stack>
             </Stack>
           </Stack>
@@ -439,56 +525,27 @@ function WebView() {
           <Stack ref={omniRef} py="40px" gap="16px" flexDirection="row">
             <Stack>
               <Stack flexDirection="row" alignItems="center" gap="16px">
-                <Typography fontSize="24px" fontWeight="600" color="#000000">OMNI</Typography>
+                <Typography fontSize="24px" fontWeight="600" color="#000000">{solutions.omni.title}</Typography>
                 <Stack p="4px 12px" borderRadius="16px" flexDirection="row" alignItems="center" gap="4px" sx={{background: "linear-gradient(90deg, #FFE7DA 0%, #FFF7E8 100%)"}}>
                   <AutoAwesome sx={{color: "#FE5000"}} />
-                  <Typography mt="2px" fontSize="14px" fontWeight="600" color="#FE5000">AI-Powered</Typography>
+                  <Typography mt="2px" fontSize="14px" fontWeight="600" color="#FE5000">{textConst.aiPowered}</Typography>
                 </Stack>
               </Stack>
-              <Typography fontSize="16px" fontWeight="600" color="#687076">Unify your calls, chats & meetings in the cloud</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.omni.subtitle}</Typography>
               <Stack py="16px" gap="16px">
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                 <Stack gap="8px">
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="600" color="#FF7536">Unlimited Incoming Calls</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#FF7536">1x Business DID Number</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Comprehensive Call Recording</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">AI Driven Transcription & Analytics</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">Security & Remote Access</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: "#FA934E"}} />
-                    <Typography fontSize="14px" fontWeight="400" color="#11181C">System Report</Typography>
-                  </Stack>
+                  {solutions.omni.function.map((solution, index) => {
+                    const firstSolution = index === 0;
+                    return (
+                      <Stack flexDirection="row" gap="4px" alignItems="center">
+                        <CheckCircle sx={{color: "#FA934E"}} />
+                        <Typography fontSize="14px" fontWeight={firstSolution ? "600" : "400"} color={firstSolution ? "#FF7536" : "#11181C"}>{solution}</Typography>
+                      </Stack>
+                    );
+                  })}
                 </Stack>
-                <Button 
-                  variant="contained" 
-                  sx={{...buttonStyle,
-                    bgcolor: "#FE5000", 
-                    fontSize:"20px", 
-                    fontWeight:"600", 
-                    color:"#FBFCFD", 
-                    borderRadius: "300px", 
-                    width: "fit-content" 
-                  }} 
-                  endIcon={<East />} 
-                  onClick={()=> scrollTo(formRef)}
-                >
-                  Free Consultation
-                </Button>
+                <NavigateButton text={buttonText.freeConsultation} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
               </Stack>
             </Stack>
             <SampleProjectImages solution="omni" view="web"/>
@@ -499,84 +556,55 @@ function WebView() {
         <Stack bgcolor="#FFF" width="100%" height="66px" sx={{clipPath: "ellipse(50% 100% at 50% 0%)"}}></Stack>
         <Stack width={fixWidth} pt="16px" alignItems="center" gap="24px">
           <Stack alignItems="center">
-            <Typography fontSize="32px" fontWeight="600" color="#000000">Step-by-Step Guide</Typography>
+            <Typography fontSize="32px" fontWeight="600" color="#000000">{textConst.stepByStep}</Typography>
             <Stack flexDirection="row" alignItems="center" gap="12px">
-              <Typography mt="8px" fontSize="32px" fontWeight="500" color="#11181C">to</Typography>
-              <Typography fontSize="48px" fontWeight="600" color="#FE5000">Getting Our Solutions</Typography>
+              <Typography mt="8px" fontSize="32px" fontWeight="500" color="#11181C">{textConst.to}</Typography>
+              <Typography fontSize="48px" fontWeight="600" color="#FE5000">{textConst.gettingSolution}</Typography>
             </Stack>
           </Stack>
           <Stack gap="27px" flexDirection="row">
-            <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
-              <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">Step 1</Typography>
-              </Stack>
-              <Typography fontSize="20px" fontWeight="600" color="#00061D">Quotation Request</Typography>
-              <Typography fontSize="16px" fontWeight="400" color="#11181C">Applicants contact Infront Consulting to get a quotation for up to 3 services.</Typography>
-            </Stack>
-            <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
-              <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">Step 2</Typography>
-              </Stack>
-              <Typography fontSize="20px" fontWeight="600" color="#00061D">Submit Application</Typography>
-              <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Applicants share the required documents with our Sales Representative.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">We'll take care of the rest and submit the application for you.</Typography>
-                </ListItem>
-              </List>
-            </Stack>
-            <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
-              <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">Step 3</Typography>
-              </Stack>
-              <Typography fontSize="20px" fontWeight="600" color="#00061D">Confirmation & Payment</Typography>
-              <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Applicants will receive an email if successful.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Applicants must pay the remaining balance (after deducting the grant amount) within 14 days.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Payment is made through a unique payment link sent via email.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Failure to make payment on time will result in the cancellation of the grant.</Typography>
-                </ListItem>
-              </List>
-            </Stack>
+            {Object.entries(stepGuides).slice(0, 3).map(([index, step]) => {
+              const isFirst = index === "1";
+              return (
+                <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
+                  <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
+                    <Typography fontSize="16px" fontWeight="600" color="#FE5000">{step.step}</Typography>
+                  </Stack>
+                  <Typography fontSize="20px" fontWeight="600" color="#00061D">{step.title}</Typography>
+                  {isFirst ?
+                    <Typography fontSize="16px" fontWeight="400" color="#11181C">{step.description[0]}</Typography>
+                  :
+                    <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
+                      {step.description.map(point => (
+                        <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
+                          <Typography fontSize="16px" fontWeight="400" color="#11181C">{point}</Typography>
+                        </ListItem>
+                      ))}
+                    </List>
+                  }
+                </Stack>
+              )
+            })}
           </Stack>
           <Stack gap="27px" flexDirection="row">
-            <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
-              <Stack p="2px 16px" mb="20px" bgcolor="#FFF1E7" borderRadius="300px" width="fit-content" alignItems="center">
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">Step 4</Typography>
-              </Stack>
-              <Typography fontSize="20px" fontWeight="600" color="#00061D">Service Delivery & Grant Disbursement</Typography>
-              <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Infront Consulting delivers the service.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">BSN will disburse 50% (up to RM5,000) directly to Infront Consulting in stages.</Typography>
-                </ListItem>
-              </List>
-            </Stack>
-            <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
-              <Stack p="2px 16px" mb="20px" border="1px solid" borderColor="#FE5000" borderRadius="300px" width="fit-content" alignItems="center">
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">Note</Typography>
-              </Stack>
-              <Typography fontSize="20px" fontWeight="600" color="#00061D">Take Note</Typography>
-              <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">Keep proof of service activation as BSN may request it.</Typography>
-                </ListItem>
-                <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                  <Typography fontSize="16px" fontWeight="400" color="#11181C">If requirements aren't followed, your business may be blacklisted in the future.</Typography>
-                </ListItem>
-              </List>
-            </Stack>
+            {Object.entries(stepGuides).slice(3, 5).map(([index, step]) => {
+              const isLast = index === "5";
+              return (
+                <Stack width="316px" height="342px" p="24px" borderRadius="16px" bgcolor="#FFF" gap="4px">
+                  <Stack p="2px 16px" mb="20px" border={isLast ? "1px solid" : ""} borderColor={isLast ? "#FE5000" : ""} bgcolor={isLast ? "" : "#FFF1E7"} borderRadius="300px" width="fit-content" alignItems="center">
+                    <Typography fontSize="16px" fontWeight="600" color="#FE5000">{step.step}</Typography>
+                  </Stack>
+                  <Typography fontSize="20px" fontWeight="600" color="#00061D">{step.title}</Typography>
+                  <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
+                    {step.description.map(point => (
+                      <ListItem sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
+                        <Typography fontSize="16px" fontWeight="400" color="#11181C">{point}</Typography>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Stack>
+              )
+            })}
           </Stack>
         </Stack>
         <Stack width="100%" mt="24px" height="66px" sx={{clipPath: "ellipse(50% 100% at 50% 100%)", background: "linear-gradient(180deg, #FFE8D9 -6.04%, #FFF 100%)"}}></Stack>
@@ -584,10 +612,10 @@ function WebView() {
       <Stack ref={formRef} py="80px" sx={{...containerStyle, background: "linear-gradient(180deg, #FFF 0%, #FEF8F4 100%)"}}>
         <Stack width={fixWidth} alignItems="center" gap="32px">
           <Stack alignItems="center" gap="8px">
-            <Typography fontSize="48px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
+            <Typography fontSize="48px" fontWeight="600" color="#FE5000">{textConst.checkEligibility}</Typography>
             <Stack alignItems="center">
-              <Typography fontSize="18px" fontWeight="400" color="#000000">Provide us your contact details below and find out if your business is eligible to claim up to RM5,000.</Typography>
-              <Typography fontSize="18px" fontWeight="400" color="#000000">We'll get in touch to start the grant application process for you.</Typography>
+              <Typography fontSize="18px" fontWeight="400" color="#000000">{textConst.eligibilityDescription}</Typography>
+              <Typography fontSize="18px" fontWeight="400" color="#000000">{textConst.eligibilityDescription1}</Typography>
             </Stack>
           </Stack>
           <form method="POST" action="https://infrontapac.activehosted.com/proc.php" id="_form_45_" >
@@ -607,12 +635,12 @@ function WebView() {
               <Stack flex={1} p="24px" gap="24px" bgcolor="#FFF">
                 <Stack flex={1}>
                   <FormControl>
-                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">What solution are you looking for?</Typography>
+                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question1}</Typography>
                     <Select {...register("field[125]", {required: "Please select an option"})} defaultValue="">
-                      <MenuItem value="emis">EMIS 360</MenuItem>
-                      <MenuItem value="althr">altHR</MenuItem>
-                      <MenuItem value="insuite">inSuite</MenuItem>
-                      <MenuItem value="omni">OMNI</MenuItem>
+                      {Object.entries(solutions).map(([index, solution]) => (
+                        <MenuItem value={index}>{solution.title}</MenuItem>
+                      ))
+                      }
                     </Select>
                     <Typography fontSize="16px" fontWeight="400" color="error">
                       {errors["field[125]"]?.message}
@@ -622,7 +650,7 @@ function WebView() {
                 <Stack flexDirection="row" gap="24px">
                   <Stack flex={1}>
                     <FormControl>
-                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Full Name (as per I/C or passport)</Typography>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question2}</Typography>
                       <TextField {...register("firstName", {required: "Please fill in the field"})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.firstName?.message}
@@ -631,7 +659,7 @@ function WebView() {
                   </Stack>
                   <Stack flex={1}>
                     <FormControl>
-                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Name</Typography>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question3}</Typography>
                       <TextField {...register("customer_account", {required: "Please fill in the field"})} />
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.customer_account?.message}
@@ -642,7 +670,7 @@ function WebView() {
                 <Stack flexDirection="row" gap="24px">
                   <Stack flex={1}>
                     <FormControl>
-                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Company Email</Typography>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question4}</Typography>
                       <TextField type="email" {...register("email", {required: "Please fill in the field"})} />
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.email?.message}
@@ -651,8 +679,8 @@ function WebView() {
                   </Stack>
                   <Stack flex={1}>
                     <FormControl>
-                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
-                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10,11}$/, message: "Please enter a valid number"}})}/>
+                      <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question5}</Typography>
+                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10, 11}$/, message: "Please enter a valid number"}})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.phone?.message}
                       </Typography>
@@ -661,7 +689,7 @@ function WebView() {
                 </Stack>
                 <Stack flex={1}>
                   <FormControl>
-                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">How did you hear about us?</Typography>
+                    <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">{textConst.question6}</Typography>
                     <Select {...register("field[123]", {required: "Please select an option"})} defaultValue="">
                       <MenuItem value="CelcomDigi">CelcomDigi</MenuItem>
                       <MenuItem value="Social Media (Facebook, Instagram, LinkedIn)">Social Media (Facebook, Instagram, LinkedIn)</MenuItem>
@@ -677,38 +705,20 @@ function WebView() {
                   </FormControl>
                 </Stack>
                 <Stack mt="44px">
-                  <Typography fontSize="14px" fontWeight="400" color="#858585">By clicking "Submit", I/we confirm that I/we have read, understood, and agree to the processing of personal data — including sensitive personal data — provided by me/us, our employees, representatives, and/or authorized signatories, for the purpose of processing by Infront Consulting.</Typography>
+                  <Typography fontSize="14px" fontWeight="400" color="#858585">{textConst.declaration}</Typography>
                 </Stack>
                 <Stack alignItems="center">
-                  <Button variant="contained" type="submit" sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>Submit</Button>
+                  <Button variant="contained" type="submit" sx={{...buttonStyle, bgcolor: "#FE5000", width: "150px", fontSize:"20px", fontWeight:"600", color:"#FBFCFD" }}>{buttonText.submit}</Button>
                 </Stack>
               </Stack>
               <Stack width="300px" height="100%" p="24px" bgcolor="#FFF1E7" borderRadius="16px" gap="8px">
-                <Typography fontSize="20px" fontWeight="600" color="#FE5000">Check Your Eligibility</Typography>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">No prior Digitalisation Grant received</Typography>
-                </Stack>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">At least 60% Malaysian-owned</Typography>
-                </Stack>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Registered with SSM, PBT, or SKM (for cooperatives)</Typography>
-                </Stack>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Have been in operation for at least six (6) months</Typography>
-                </Stack>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Minimum average annual sales turnover of at least RM50,000</Typography>
-                </Stack>
-                <Stack gap="8px" flexDirection="row" alignItems="center">
-                  <CheckCircle sx={{color: "#FA934E"}}/>
-                  <Typography fontSize="14px" fontWeight="400" color="#11181C">Limited to one (1) application per business (but up to three types of digital services)</Typography>
-                </Stack>
+                <Typography fontSize="20px" fontWeight="600" color="#FE5000">{textConst.checkEligibility}</Typography>
+                {eligibilityRequirement.map(point => (
+                  <Stack gap="8px" flexDirection="row" alignItems="center">
+                    <CheckCircle sx={{color: "#FA934E"}}/>
+                    <Typography fontSize="14px" fontWeight="400" color="#11181C">{point}</Typography>
+                  </Stack>
+                ))}
               </Stack>
             </Stack>
           </form>
@@ -720,7 +730,7 @@ function WebView() {
           <Stack gap="33px">
             <Stack gap="6px" width="331px">
               <img src={InfrontLogo2} alt="infront-logo" width="229px" height="121px"  onClick={()=> window.open("https://infrontconsulting.asia/", "_blank")} style={{cursor: "pointer"}}/>
-              <Typography fontSize="16px" fontWeight="600" color="#D7DBDF">Improving the lives of organisations through the power of technology</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#D7DBDF">{textConst.vision}</Typography>
             </Stack>
             <Stack gap="29px" flexDirection="row">
               <Facebook onClick={()=> window.open("https://www.facebook.com/infrontasiapacific/", "_blank")} sx={{color: "#FFF", cursor: "pointer"}}/>
@@ -730,13 +740,13 @@ function WebView() {
             </Stack>
           </Stack>
           <Stack justifyContent="center" alignItems="end" gap="16px">
-            <Typography fontSize="20px" fontWeight="500" color="#FBFCFD">Contact us</Typography>
+            <Typography fontSize="20px" fontWeight="500" color="#FBFCFD">{textConst.contactUs}</Typography>
             <Stack flexDirection="row" gap="8px">
-              <Typography fontSize="18px" fontWeight="400" color="#D7DBDF">+ 03 7957 7228</Typography>
+              <Typography fontSize="18px" fontWeight="400" color="#D7DBDF">{textConst.phone}</Typography>
               <Phone sx={{color: "#FBFCFD"}}/>
             </Stack>
             <Stack flexDirection="row" gap="8px">
-              <Typography fontSize="20px" fontWeight="500" color="#D7DBDF">my.info@infrontconsulting.com.my</Typography>
+              <Typography fontSize="20px" fontWeight="500" color="#D7DBDF">{textConst.email}</Typography>
               <Email sx={{color: "#FBFCFD"}}/>
             </Stack>
           </Stack>

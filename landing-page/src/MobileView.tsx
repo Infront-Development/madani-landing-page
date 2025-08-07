@@ -664,7 +664,7 @@ function MobileView() {
                   <Stack flex={1}>
                     <FormControl>
                       <Typography fontSize="16px" fontWeight="400" color="#6F6F6F">Mobile Number</Typography>
-                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10,11}$/, message: "Please enter a valid number"}})}/>
+                      <TextField {...register("phone", {required: "Please fill in the field", pattern: {value: /^[0-9]{10, 11}$/, message: "Please enter a valid number"}})}/>
                       <Typography fontSize="16px" fontWeight="400" color="error">
                         {errors.phone?.message}
                       </Typography>

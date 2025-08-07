@@ -213,7 +213,7 @@ export const Questions = () => {
 
 export const FAQ = ({view}: {view: string}) => {
   const isMobile = view === "mobile";
-  const fixWidth = !isMobile ? "1000px" : "calc(100%-48px)";
+  const fixWidth = !isMobile ? "1000px" : "calc(100% - 48px)";
 
   return (
     <Stack py="80px" sx={{...containerStyle, background: "linear-gradient(180deg, #FFF 0%, #FEF8F4 100%)"}}>

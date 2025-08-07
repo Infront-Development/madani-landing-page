@@ -7,10 +7,18 @@ interface IButton {
     function: () => void;
     icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
     borderRadius?: string;
+    fullWidth?: boolean;
 }
 
 export const NavigateButton = (props: IButton) => {
-    const { text, type, function: onClick, icon: IconComponent, borderRadius } = props;
+    const { 
+        text, 
+        type, 
+        function: onClick, 
+        icon: IconComponent, 
+        borderRadius, 
+        fullWidth 
+    } = props;
     const isContained = type === "contained";
 
     return (
@@ -30,6 +38,7 @@ export const NavigateButton = (props: IButton) => {
                 borderRadius: borderRadius ?? "16px", 
                 width: "fit-content" 
             }} 
+            fullWidth={fullWidth}
         >
             {text}
         </Button>

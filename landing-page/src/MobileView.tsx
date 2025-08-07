@@ -27,6 +27,8 @@ import {
 import { useRef, useState, useEffect, RefObject } from "react";
 import SampleProjectImages from './components/SampleProjectImages';
 import FAQ from "./components/FAQ";
+import NavigateButton from "./components/NavigateButton";
+import { solutions, stepGuides, madaniInfo, eligibilityRequirement, textConst, buttonText, question6Options } from "./assets/text/text";
 import { useSubmitForm } from "./hooks/useSubmitForm";
 
 import InfrontLogo from "./assets/images/Infront_Logo_With_CDB_Logo_1.png";
@@ -96,6 +98,12 @@ function MobileView() {
       }, 500);
     }
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  };
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -110,12 +118,7 @@ function MobileView() {
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
-  };
+
 
   return (
     <Stack alignItems="center">
@@ -142,17 +145,17 @@ function MobileView() {
         </Stack>
         <Stack position="sticky" top={0} zIndex={100} sx={containerStyle} bgcolor="#FE5000">
           <Stack sx={pContent} py="8px" direction="row" alignItems="center" justifyContent="space-between">
-            <Typography fontSize="16px" fontWeight="600" color="#FBFCFD">Limited Slot Available</Typography>
+            <Typography fontSize="16px" fontWeight="600" color="#FBFCFD">{textConst.limitedSlot}</Typography>
             <Button variant="contained" sx={{...buttonStyle, py: "2px", bgcolor: "#FFF", fontSize:"16px", fontWeight:"600", color:"#000"}} onClick={()=> scrollTo(formRef)}>Apply Now</Button>
           </Stack>
         </Stack>
         <Stack sx={{...containerStyle, background: `linear-gradient(180deg, rgba(253, 233, 225, 0.40) 0%, rgba(252, 229, 240, 0.40) 100%), url(${Mobile_Banner_Background}) lightgray 50% / cover no-repeat`}}>
           <Stack sx={pContent} alignItems="center" py="40px">
-              <Typography fontSize="24px" fontWeight="600" color="#000000">Digitalise your business</Typography>
-              <Typography fontSize="20px" fontWeight="600" color="#7E868C">with up to</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#000000">{textConst.digitaliseBusiness}</Typography>
+              <Typography fontSize="20px" fontWeight="600" color="#7E868C">{textConst.withUpTo}</Typography>
               <Stack flexDirection="row" alignItems="center" gap="16px">
-                <Typography fontSize="48px" fontWeight="600" color="#FE5000">RM5000 </Typography>
-                <Typography mt="12px" fontSize="32px" fontWeight="600" color="#000000">Grant</Typography>
+                <Typography fontSize="48px" fontWeight="600" color="#FE5000">{textConst.rm5k}</Typography>
+                <Typography mt="12px" fontSize="32px" fontWeight="600" color="#000000">{textConst.grant}</Typography>
               </Stack>
               <Stack>
                 <img src={Frame_4} alt="Devices" width="100%" height="280px" />
@@ -162,7 +165,7 @@ function MobileView() {
                 <Button variant="outlined" fullWidth sx={{...buttonStyle, padding: "12px 24px", bgcolor: "#FBFCFD", borderColor: "#FE5000", fontSize: "20px", fontWeight: "600", color: "#FE5000"}} onClick={()=> scrollTo(solutionRef)}>Browse Product</Button>
               </Stack>
               <Stack gap="8px" borderRadius="16px" py="16px" width="100%" sx={{background: "linear-gradient(90deg, rgba(249, 249, 249, 0.40) 0%, rgba(253, 253, 253, 0.40) 100%)"}}>
-                <Typography ml="24px" fontSize="12px" fontWeight="400" color="#687076">An Initiative Under</Typography>
+                <Typography ml="24px" fontSize="12px" fontWeight="400" color="#687076">{textConst.initiative}</Typography>
                 <Stack display="flex" flexDirection="row" gap="4px" ml="20px">
                   <img src={madanilogo} alt="madani" width="64px" height="24px" />
                   <img src={bsnlogo} alt="bsn" width="64px" height="24px" />
@@ -178,21 +181,19 @@ function MobileView() {
               <img src={madanilogo} alt="madani" width="240px" height="92px" />
             </Stack>
             <Stack alignItems="center">
-              <Typography fontSize="32px" fontWeight="600" color="#00254D">Madani PMKS</Typography>
-              <Typography fontSize="32px" fontWeight="600" color="#00254D">Digital Grant</Typography>
+              <Typography fontSize="32px" fontWeight="600" color="#00254D">{madaniInfo.mobileTitle1}</Typography>
+              <Typography fontSize="32px" fontWeight="600" color="#00254D">{madaniInfo.mobileTitle2}</Typography>
             </Stack>
             <Stack gap="16px" alignItems="center">
-              <Typography fontSize="16px" fontWeight="600" color="#11181C" sx={{textIndent: "2em", textAlign: "center"}}>The Madani PMKS Digital Grant is a government grant to help Malaysian micro, small, and medium enterprises (PMKS) use digital solutions to improve their business.</Typography>
+              <Typography fontSize="16px" fontWeight="600" color="#11181C" sx={{textIndent: "2em", textAlign: "center"}}>{madaniInfo.subtitle}</Typography>
               <Stack>
                 <Stack gap="4px">
-                  <Stack flexDirection="row" gap="8px" alignItems="center">
-                    <CheckCircle sx={{color: "#ED5F00"}}/>
-                    <Typography fontSize="16px" fontWeight="400" color="#11181C">50% matching grant or up to RM5,000 per company.</Typography>
-                  </Stack>
-                  <Stack flexDirection="row" gap="8px" alignItems="center">
-                    <CheckCircle sx={{color: "#ED5F00"}}/>
-                    <Typography fontSize="16px" fontWeight="400" color="#11181C">Managed by: Ministry of Finance, BSN, MDEC & MCMC.</Typography>
-                  </Stack>
+                  {madaniInfo.description.map(point => (
+                    <Stack flexDirection="row" gap="8px" alignItems="center">
+                      <CheckCircle sx={{color: "#ED5F00"}}/>
+                      <Typography fontSize="16px" fontWeight="400" color="#11181C">{point}</Typography>
+                    </Stack>
+                  ))}
                 </Stack>
               </Stack>
             </Stack>
@@ -201,40 +202,40 @@ function MobileView() {
         <Stack ref={solutionRef} sx={{...containerStyle, background: `url(${greybackground}) lightgray 10% / cover no-repeat`}}>
           <Stack sx={pContent} alignItems="center" py="80px" gap="32px">
             <Stack alignItems="center">
-              <Typography fontSize="24px" fontWeight="600" color="#000">Kickstart Your</Typography>
-              <Typography fontSize="24px" fontWeight="600" color="#000">Digital Journey</Typography>
-              <Typography mt="-4px" fontSize="20px" fontWeight="500" color="#7E868C">With</Typography>
-              <Typography fontSize="32px" fontWeight="600" color="#FE5000">Infront Consulting</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#000">{textConst.kickstartMobile1}</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#000">{textConst.kickstartMobile2}</Typography>
+              <Typography mt="-4px" fontSize="20px" fontWeight="500" color="#7E868C">{textConst.with}</Typography>
+              <Typography fontSize="32px" fontWeight="600" color="#FE5000">{textConst.infront}</Typography>
             </Stack>
             <Stack alignItems="center">
-              <Typography fontSize="18px" fontWeight="600" color="#687076">Officially appointed as a</Typography>
-              <Typography fontSize="18px" fontWeight="600" color="#687076">trusted Digitalisation Partner</Typography>
+              <Typography fontSize="18px" fontWeight="600" color="#687076">{textConst.officiallyAppointedMobile1}</Typography>
+              <Typography fontSize="18px" fontWeight="600" color="#687076">{textConst.officiallyAppointedMobile2}</Typography>
             </Stack>
             <Stack alignItems="center" gap="24px" flex={1}>
               <Stack p="24px" borderRadius="16px" onClick={()=> scrollTo(emisRef, containerRef)} sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${EMIS360_banner}) lightgray 50% / cover no-repeat`}}>
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                <Typography fontSize="32px" fontWeight="600" color="#11181C">EMIS 360</Typography>
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.emis.title}</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.emis.subtitle}</Typography>
               </Stack>
               <Stack width="calc(100% - 48px)" p="24px" onClick={()=> scrollTo(altHrRef, containerRef)} borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${altHR_banner}) lightgray 50% / cover no-repeat`}}>
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
                 <Stack my="8px">
                     <img src={altHR} alt="alt" width="166px" height="32px"/>
                 </Stack>
-                <Typography fontSize="16px" fontWeight="600" color="#687076">All-in-one HR app for happy teams</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.althr.subtitle}</Typography>
               </Stack>
               <Stack p="24px" borderRadius="16px" onClick={()=> scrollTo(inSuiteRef, containerRef)} sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${inSuite_banner}) lightgray 50% / cover no-repeat`}}>
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                <Typography fontSize="32px" fontWeight="600" color="#11181C">inSuite</Typography>
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Optimize with productivity tools & cybersecurity</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.insuite.title}</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.insuite.subtitle}</Typography>
               </Stack>
               <Stack p="24px" borderRadius="16px" onClick={()=> scrollTo(omniRef, containerRef)} sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${OMNI_banner}) lightgray 50% / cover no-repeat`}}>
-                <Typography fontSize="16px" fontWeight="600" color="#FE5000">50% Grant</Typography>
-                <Typography fontSize="32px" fontWeight="600" color="#11181C">OMNI</Typography>
-                <Typography fontSize="16px" fontWeight="600" color="#687076">Unify your calls, chats & meetings in the cloud</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#FE5000">{textConst["50%Grant"]}</Typography>
+                <Typography fontSize="32px" fontWeight="600" color="#11181C">{solutions.omni.title}</Typography>
+                <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.omni.subtitle}</Typography>
               </Stack>
               <Stack alignItems="center">
-                <Typography fontSize="18px" fontWeight="400" color="#687076">Capped at RM5,000</Typography>
+                <Typography fontSize="18px" fontWeight="400" color="#687076">{textConst.capped}</Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -242,47 +243,32 @@ function MobileView() {
         <Stack sx={{...containerStyle, backdropFilter: "blur(8px)"}}>
           <Stack sx={pContent} py="40px" gap="24px">
             <Stack gap="16px">
-              <Typography fontSize="32px" fontWeight="400" color="#7E868C">Our Solutions</Typography>
-              <Typography fontSize="24px" fontWeight="600" color="#11181C">Starting from</Typography>
+              <Typography fontSize="32px" fontWeight="400" color="#7E868C">{textConst.ourSolutions}</Typography>
+              <Typography fontSize="24px" fontWeight="600" color="#11181C">{textConst.startingFrom}</Typography>
               <Stack mt="-24px" flexDirection="row" alignItems="center" gap="8px">
-                <Typography fontSize="32px" fontWeight="500" color="#FF632E">RM8</Typography>
-                <Typography mt="4px" fontSize="20px" fontWeight="500" color="#687076">monthly /user</Typography>
+                <Typography fontSize="32px" fontWeight="500" color="#FF632E">{textConst.rm8}</Typography>
+                <Typography mt="4px" fontSize="20px" fontWeight="500" color="#687076">{textConst.monthlyUser}</Typography>
               </Stack>
             </Stack>
             <Stack ref={containerRef} gap="8px" flexDirection="row" width="100%" overflow="auto">
               <Stack ref={emisRef} width="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor="#E6E8EB" bgcolor="#F8F9FA">
                 <Stack p="24px">
-                  <Typography fontSize="24px" fontWeight="600" color="#000">EMIS 360</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Simplified e-Invoicing solution for your business</Typography>
+                  <Typography fontSize="24px" fontWeight="600" color="#000">{solutions.emis.title}</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.emis.subtitle}</Typography>
                 </Stack>
                 <SampleProjectImages solution="emis" view="mobile"/>
                 <Stack p="24px" gap="16px">
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                   <Stack gap="8px">
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="600" color="#FF7536">24/7 Local Support Team</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Dashboard & Analytics</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Seamless ERP Integration</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Batch Invoice Processing</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Export Reports</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Full Compliance with LHDN</Typography>
-                    </Stack>
+                    {solutions.emis.function.map((point, index)=> {
+                      const isFirst = index === 0;
+                      return (
+                        <Stack flexDirection="row" gap="4px" alignItems="center">
+                          <CheckCircle sx={{color: "#FA934E"}} />
+                          <Typography fontSize="14px" fontWeight={isFirst ? "600" : "400"} color={isFirst ? "#FF7536" : "#11181C"}>{point}</Typography>
+                        </Stack>
+                      )
+                    })}
                   </Stack>
                 </Stack>
                 <Stack alignItems="left" p="24px" mt="auto">
@@ -308,33 +294,22 @@ function MobileView() {
                   <Stack my="8px">
                     <img src={altHR} alt="alt" width="125px" height="24px"/>
                   </Stack>
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">All-in-one HR app for happy teams</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{solutions.althr.subtitle}</Typography>
                 </Stack>
                 <Stack height="20px"></Stack>
                 <SampleProjectImages solution="althr" view="mobile"/>
                 <Stack p="24px" gap="16px">
-                  <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
+                  <Typography fontSize="16px" fontWeight="600" color="#687076">{textConst.coreFunction}</Typography>
                   <Stack gap="8px">
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="600" color="#FF7536">Easy Leave Application & Approval</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Staff Directory in One Place</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">E-Payslips</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Smart Attendance Tracking</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Share Policies Instantly</Typography>
-                    </Stack>
+                    {solutions.althr.function.map((point, index)=> {
+                      const isFirst = index === 0;
+                      return (
+                        <Stack flexDirection="row" gap="4px" alignItems="center">
+                          <CheckCircle sx={{color: "#FA934E"}} />
+                          <Typography fontSize="14px" fontWeight={isFirst ? "600" : "400"} color={isFirst ? "#FF7536" : "#11181C"}>{point}</Typography>
+                        </Stack>
+                      )
+                    })}
                   </Stack>
                 </Stack>
                 <Stack alignItems="left" p="24px" mt="auto">
@@ -364,26 +339,15 @@ function MobileView() {
                 <Stack p="24px" gap="16px">
                   <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
                   <Stack gap="8px">
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="600" color="#FF7536">24/7 Managed Service Team</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Microsoft 365 Tools + Google Workspace</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">IT Support & Setup</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Proactive Monitoring</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Data Backup & Protection</Typography>
-                    </Stack>
+                    {solutions.insuite.function.map((point, index)=> {
+                      const isFirst = index === 0;
+                      return (
+                        <Stack flexDirection="row" gap="4px" alignItems="center">
+                          <CheckCircle sx={{color: "#FA934E"}} />
+                          <Typography fontSize="14px" fontWeight={isFirst ? "600" : "400"} color={isFirst ? "#FF7536" : "#11181C"}>{point}</Typography>
+                        </Stack>
+                      )
+                    })}
                   </Stack>
                   <Stack mt="8px">
                     <Typography fontSize="16px" fontWeight="600" color="#687076">Add-On Available</Typography>
@@ -426,30 +390,15 @@ function MobileView() {
                 <Stack p="24px" gap="16px">
                   <Typography fontSize="16px" fontWeight="600" color="#687076">Core Function</Typography>
                   <Stack gap="8px">
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="600" color="#FF7536">Unlimited Incoming Calls</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">1x Business DID Number</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Comprehensive Call Recording</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">AI Driven Transcription & Analytics</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">Security & Remote Access</Typography>
-                    </Stack>
-                    <Stack flexDirection="row" gap="4px" alignItems="center">
-                      <CheckCircle sx={{color: "#FA934E"}} />
-                      <Typography fontSize="14px" fontWeight="400" color="#11181C">System Report</Typography>
-                    </Stack>
+                    {solutions.omni.function.map((point, index)=> {
+                      const isFirst = index === 0;
+                      return (
+                        <Stack flexDirection="row" gap="4px" alignItems="center">
+                          <CheckCircle sx={{color: "#FA934E"}} />
+                          <Typography fontSize="14px" fontWeight={isFirst ? "600" : "400"} color={isFirst ? "#FF7536" : "#11181C"}>{point}</Typography>
+                        </Stack>
+                      )
+                    })}
                   </Stack>
                 </Stack>
                 <Stack alignItems="left" p="24px" mt="auto">

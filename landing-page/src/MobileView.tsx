@@ -241,7 +241,7 @@ function MobileView() {
               </Stack>
             </Stack>
             <Stack ref={containerRef} gap="8px" flexDirection="row" width="100%" overflow="auto">
-              <Stack ref={emisRef} width="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
+              <Stack ref={emisRef} width="calc(100% - 12px)" minWidth="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
                 <Stack p="24px">
                   <Typography fontSize="24px" fontWeight="600" color={color.black}>{solutions.emis.title}</Typography>
                   <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.emis.subtitle}</Typography>
@@ -265,7 +265,7 @@ function MobileView() {
                   <NavigateButton text={buttonText.freeConsultation} type="contained" function={()=> scrollTo(formRef)} borderRadius="300px" icon={East}/>
                 </Stack>
               </Stack>
-              <Stack ref={altHrRef} width="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
+              <Stack ref={altHrRef} width="calc(100% - 12px)" minWidth="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
                 <Stack p="24px">
                   <Stack my="8px">
                     <img src={altHR} alt="alt" width="125px" height="24px"/>
@@ -292,7 +292,7 @@ function MobileView() {
                   <NavigateButton text={buttonText.freeConsultation} type="contained" function={()=> scrollTo(formRef)} borderRadius="300px" icon={East}/>
                 </Stack>
               </Stack>
-              <Stack ref={inSuiteRef} width="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
+              <Stack ref={inSuiteRef} width="calc(100% - 12px)" minWidth="calc(100% - 12px)" borderRadius="16px" border="1px solid" borderColor={color.grey.grey5} bgcolor={color.grey.grey2}>
                 <Stack p="24px">
                   <Typography fontSize="24px" fontWeight="600" color={color.black}>{solutions.insuite.title}</Typography>
                   <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.insuite.subtitle}</Typography>

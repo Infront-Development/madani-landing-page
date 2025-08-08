@@ -156,7 +156,7 @@ export const textConst = {
   officiallyAppointedMobile1: "Officially appointed as a",
   officiallyAppointedMobile2: "trusted Digitalisation Partner",
   ourSolutions: "Our Solutions",
-  
+  faq: "Frequently Asked Question (FAQ)",
 };
 
 export const buttonText = {

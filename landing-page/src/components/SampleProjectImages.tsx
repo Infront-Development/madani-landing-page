@@ -42,7 +42,7 @@ export const SampleProjectImages = ({solution, view}: {solution: ISolution, view
     }
     
     return (
-        <Stack gap="16px" alignItems="center">
+        <Stack flex={1} gap="16px" alignItems="center">
             <img src={imageSets[solution as keyof typeof imageSets][selectedPicture]} alt="screenshots" height={imageSize[view as keyof typeof imageSize].height} width={imageSize[view as keyof typeof imageSize].width} />
             <Stack gap="8px" flexDirection="row" width={isMobile ? "calc(100% - 48px)" : "100%"} overflow={isMobile ? "auto" : "unset"}>
                 {imageSets[solution as keyof typeof imageSets].map((item, index) => {

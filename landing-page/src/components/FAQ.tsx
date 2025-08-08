@@ -11,13 +11,7 @@ import {
 import { 
   ArrowCircleDown,
 } from "@mui/icons-material";
-
-const containerStyle = {
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
+import { textConst } from "../assets/text";
 
 export const Questions = () => {
 
@@ -211,22 +205,13 @@ export const Questions = () => {
   )
 };
 
-export const FAQ = ({view}: {view: string}) => {
-  const isMobile = view === "mobile";
-  const fixWidth = !isMobile ? "1000px" : "calc(100% - 48px)";
+export const FAQ = ({view, fixWidth}: {view: string, fixWidth: string}) => {
+  const isWeb = view === "web";
 
   return (
-    <Stack py="80px" sx={{...containerStyle, background: "linear-gradient(180deg, #FFF 0%, #FEF8F4 100%)"}}>
-      {!isMobile ?
-        <Stack width={fixWidth} alignItems="center" gap="32px">
-          <Typography fontSize="48px" fontWeight="600" color="#FE5000">Frequently Asked Question (FAQ)</Typography>
-          <Questions />
-        </Stack>
-      :
-        <Stack px="24px">
-          <Questions />
-        </Stack>
-      }
+    <Stack width={isWeb ? fixWidth : "auto"} px={isWeb ? "" : "24px"} alignItems="center" gap="32px">
+      <Typography fontSize={isWeb ? "48px" : "32px"} fontWeight="600" color="#FE5000" textAlign="center">{textConst.faq}</Typography>
+      <Questions />
     </Stack>
   )
 };

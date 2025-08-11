@@ -68,6 +68,8 @@ const buttonStyle = {
   borderRadius: "16px"
 };
 
+type SolutionKey = "emis" | "althr" | "insuite" | "omni";
+
 function WebView() {
   const displayWidth = useWindowWidth();
   const displayWidthBelow1k = displayWidth < 1100;
@@ -79,7 +81,14 @@ function WebView() {
   const formRef = useRef<HTMLDivElement>(null);
   const stepByStepRef = useRef<HTMLDivElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
+  const solutionRefList = {
+    emis: emisRef,
+    althr: altHrRef,
+    insuite: inSuiteRef,
+    omni: omniRef,
+  };
   const [scrollToTopButton, setScrollToTopButton] = useState<boolean>(false);
+  const [ displaySolution, setDisplaySolution ] = useState<SolutionKey>("emis");
   const { register, errors } = useSubmitForm();
   
   const scrollTo = (ref: RefObject<HTMLDivElement | null>) => {
@@ -111,7 +120,49 @@ function WebView() {
 
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);    
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Check if the element is intersecting and is at the top
+          if (entry.isIntersecting) {
+            // Find which solution this ref belongs to
+            const solutionKey = (Object.entries(solutionRefList) as [SolutionKey, React.RefObject<HTMLDivElement>][])
+              .find(([_, ref]) => ref.current === entry.target)?.[0];
+            
+            if (solutionKey) {
+              setDisplaySolution(solutionKey);
+            }
+          }
+        });
+      },
+      {
+        // Trigger when element reaches top 20% of viewport
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+      }
+    );
+
+    // Observe all solution elements
+    (Object.entries(solutionRefList) as [SolutionKey, React.RefObject<HTMLDivElement>][])
+      .forEach(([_, ref]) => {
+        if (ref.current) {
+          observer.observe(ref.current);
+        }
+      });
+
+    return () => {
+      // Cleanup observer
+      (Object.entries(solutionRefList) as [SolutionKey, React.RefObject<HTMLDivElement>][])
+        .forEach(([_, ref]) => {
+          if (ref.current) {
+            observer.unobserve(ref.current);
+          }
+        });
+    };
+  }, []);
 
   return (
     <Stack alignItems="center">
@@ -247,25 +298,18 @@ function WebView() {
         </Stack>
       </Stack>
       <Stack pt="32px" width={fixWidth} flexDirection="row">
-        <Stack mx="24px" gap="24px" sx={{position: "sticky", top: 0}} display={displayWidthBelow1k ? "none" : "flex"}>
+        <Stack height="267px" mx="24px" gap="24px" sx={{position: "sticky", top: 164}} display={displayWidthBelow1k ? "none" : "flex"}>
           <Typography fontSize="18px" fontWeight="500" color={color.grey.grey11}>{textConst.solutions}</Typography>
           <Stack gap="24px">
-            <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(emisRef)}>
-              <Stack borderRadius="16px" bgcolor={color.main} width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color={color.main}>{solutions.emis.title}</Typography>
-            </Stack>
-            <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(altHrRef)}>
-              <Stack borderRadius="16px" bgcolor={color.grey.grey6} width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color={color.grey.grey12}>{solutions.althr.title}</Typography>
-            </Stack>
-            <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(inSuiteRef)}>
-              <Stack borderRadius="16px" bgcolor={color.grey.grey6} width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color={color.grey.grey12}>{solutions.insuite.title}</Typography>
-            </Stack>
-            <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(omniRef)}>
-              <Stack borderRadius="16px" bgcolor={color.grey.grey6} width="40px" height="7px"></Stack>
-              <Typography fontSize="16px" fontWeight="600" color={color.grey.grey12}>{solutions.omni.title}</Typography>
-            </Stack>
+            {(Object.entries(solutionRefList) as [SolutionKey, any][]).map(([solutionKey, ref]) => {
+              const solution = solutions[solutionKey];
+              return (
+                <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(ref)}>
+                  <Stack borderRadius="16px" bgcolor={displaySolution === solutionKey ? color.main : color.grey.grey6} width="40px" height="7px"></Stack>
+                  <Typography fontSize="16px" fontWeight="600" color={displaySolution === solutionKey ? color.main : color.grey.grey12}>{solution?.title}</Typography>
+                </Stack>
+              )
+            })}
           </Stack>
           <Stack flexDirection="row" alignItems="center" sx={{cursor: "pointer"}} onClick={()=> scrollTo(stepByStepRef)}>
             <KeyboardArrowDown sx={{color: color.orange.orange10 }}/>

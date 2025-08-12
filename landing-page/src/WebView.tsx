@@ -8,7 +8,8 @@ import {
   Select,
   TextField,
   MenuItem,
-  FormControl
+  FormControl,
+  Fade,
 } from "@mui/material";
 import { 
   CheckCircle,
@@ -27,6 +28,7 @@ import {
   NavigateButton,
   ScrollToTopButton,
   Footer,
+  FadeInOnScroll,
 } from  "./components";
 import { 
   solutions, 
@@ -179,123 +181,129 @@ function WebView() {
         </Stack>
       </Stack>
       <Stack py="40px" sx={{...containerStyle, background: `linear-gradient(180deg, rgba(253, 233, 225, 0.40) 0%, rgba(252, 229, 240, 0.40) 100%), url(${headbackground}) lightgray 50% / cover no-repeat`}} >
-        <Stack width={fixWidth} flexDirection="row" justifyContent="center">
-          <Stack flex={1}>
-            <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.digitaliseBusiness}</Typography>
-            <Typography fontSize="24px" fontWeight="600" color={color.grey.grey10}>{textConst.withUpTo}</Typography>
-            <Stack flexDirection="row" alignItems="center" gap="16px">
-              <Typography fontSize="64px" fontWeight="600" color={color.main}>{textConst.rm5k}</Typography>
-              <Typography mt="12px" fontSize="48px" fontWeight="600" color={color.black}>{textConst.grant}</Typography>
-            </Stack>
-            <Stack my="16px" flexDirection="row" alignItems="center" gap="12px">
-              <NavigateButton text={buttonText.goDigital} function={()=>scrollTo(formRef)} type="contained"/>
-              <NavigateButton text={buttonText.browseProduct} function={()=> scrollTo(solutionRef)} type="outlined"/>
-            </Stack>
-            <Stack p="16px 24px" gap="8px" borderRadius="16px" sx={{background: "linear-gradient(90deg, rgba(249, 249, 249, 0.40) 0%, rgba(253, 253, 253, 0.40) 100%)"}}>
-              <Typography fontSize="12px" fontWeight="400" color={color.grey.grey11}>{textConst.initiative}</Typography>
-              <Stack display="flex" flexDirection="row" gap="4px">
-                <img src={madanilogo} alt="madani" width="64px" height="24px" />
-                <img src={bsnlogo} alt="bsn" width="64px" height="24px" />
-                <img src={mcmclogo} alt="mcmc" width="64px" height="24px" />
-                <img src={mdeclogo} alt="mcmc" width="64px" height="24px" />
+        <Fade in={true} timeout={1000}>
+          <Stack width={fixWidth} flexDirection="row" justifyContent="center">
+            <Stack flex={1}>
+              <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.digitaliseBusiness}</Typography>
+              <Typography fontSize="24px" fontWeight="600" color={color.grey.grey10}>{textConst.withUpTo}</Typography>
+              <Stack flexDirection="row" alignItems="center" gap="16px">
+                <Typography fontSize="64px" fontWeight="600" color={color.main}>{textConst.rm5k}</Typography>
+                <Typography mt="12px" fontSize="48px" fontWeight="600" color={color.black}>{textConst.grant}</Typography>
+              </Stack>
+              <Stack my="16px" flexDirection="row" alignItems="center" gap="12px">
+                <NavigateButton text={buttonText.goDigital} function={()=>scrollTo(formRef)} type="contained"/>
+                <NavigateButton text={buttonText.browseProduct} function={()=> scrollTo(solutionRef)} type="outlined"/>
+              </Stack>
+              <Stack p="16px 24px" gap="8px" borderRadius="16px" sx={{background: "linear-gradient(90deg, rgba(249, 249, 249, 0.40) 0%, rgba(253, 253, 253, 0.40) 100%)"}}>
+                <Typography fontSize="12px" fontWeight="400" color={color.grey.grey11}>{textConst.initiative}</Typography>
+                <Stack display="flex" flexDirection="row" gap="4px">
+                  <img src={madanilogo} alt="madani" width="64px" height="24px" />
+                  <img src={bsnlogo} alt="bsn" width="64px" height="24px" />
+                  <img src={mcmclogo} alt="mcmc" width="64px" height="24px" />
+                  <img src={mdeclogo} alt="mcmc" width="64px" height="24px" />
+                </Stack>
               </Stack>
             </Stack>
+            <Stack>
+              <img src={Frame_4} alt="Devices" width="100%" height="400px" />
+            </Stack>
           </Stack>
-          <Stack>
-            <img src={Frame_4} alt="Devices" width="100%" height="400px" />
-          </Stack>
-        </Stack>
+        </Fade>
       </Stack>
       <Stack py="40px" sx={{...containerStyle, background: `linear-gradient(rgba(255, 255, 255, 0.7)), url(${madanibackground}) lightgray 50% / cover no-repeat`}}>
-        <Stack width={fixWidth} flexDirection="row" justifyContent="space-between">
-          <Stack justifyContent="center">
-            <img src={madanilogo} alt="madani" width="240px" height="92px" />
-          </Stack>
-          <Stack gap="24px" width="637px">
-            <Typography fontSize="48px" fontWeight="600" color={color.blue.blue12}>{madaniInfo.title}</Typography>
-            <Stack gap="16px">
-              <Typography fontSize="20px" fontWeight="600" color={color.grey.grey12}>{madaniInfo.subtitle}</Typography>
-              <Stack gap="4px">
-                {madaniInfo.description.map((point, index) => (
-                  <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
-                    <CheckCircle sx={{color: color.orange.orange10}}/>
-                    <Typography fontSize="20px" fontWeight="400" color={color.grey.grey12}>{point}</Typography>
-                  </Stack>
-                ))}
+        <Fade in={true} timeout={1000}>
+          <Stack width={fixWidth} flexDirection="row" justifyContent="space-between">
+            <Stack justifyContent="center">
+              <img src={madanilogo} alt="madani" width="240px" height="92px" />
+            </Stack>
+            <Stack gap="24px" width="637px">
+              <Typography fontSize="48px" fontWeight="600" color={color.blue.blue12}>{madaniInfo.title}</Typography>
+              <Stack gap="16px">
+                <Typography fontSize="20px" fontWeight="600" color={color.grey.grey12}>{madaniInfo.subtitle}</Typography>
+                <Stack gap="4px">
+                  {madaniInfo.description.map((point, index) => (
+                    <Stack key={index} flexDirection="row" gap="4px" alignItems="center">
+                      <CheckCircle sx={{color: color.orange.orange10}}/>
+                      <Typography fontSize="20px" fontWeight="400" color={color.grey.grey12}>{point}</Typography>
+                    </Stack>
+                  ))}
+                </Stack>
               </Stack>
             </Stack>
           </Stack>
-        </Stack>
+        </Fade>
       </Stack>
       <Stack ref={solutionRef} py="80px" sx={{...containerStyle, background: "linear-gradient(0deg, rgba(255, 255, 255, 0.00) 51.62%, #FFF8F9 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.00) 57.5%, #FFF 100%), var(--Grays-Slate-4, #ECEEF0)"}}>
-        <Stack width={fixWidth} alignItems="center">
-          <Stack alignItems="center" mb="40px">
-            <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.kickstart}</Typography>
-            <Typography fontSize="24px" fontWeight="500" color={color.grey.grey10}>{textConst.with}</Typography>
-            <Typography mt="-8px" fontSize="48px" fontWeight="600" color={color.main}>{textConst.infront}</Typography>
-            <Typography mt="16px" fontSize="20px" fontWeight="600" color={color.grey.grey11}>{textConst.officiallyAppointed}</Typography>
-          </Stack>
-          <Stack flex={1} gap="24px">
-            <Stack gap="24px" flexDirection="row">
-              <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${EMIS360_banner}) lightgray 50% / cover no-repeat`}}>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.emis.title}</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.emis.subtitle}</Typography>
-                </Stack>
-                <Stack mt="auto" flexDirection="row" gap="12px">
-                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(emisRef)} type="outlined"/>
-                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
-                </Stack>
-              </Stack>
-              <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${altHR_banner}) lightgray 50% / cover no-repeat`}}>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
-                  <Stack my="8px">
-                    <img src={altHR} alt="alt" width="166px" height="32px"/>
-                  </Stack>
-                  <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.althr.subtitle}</Typography>
-                </Stack>
-                <Stack mt="auto" flexDirection="row" gap="12px">
-                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(altHrRef)} type="outlined" />
-                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack gap="24px" flexDirection="row">
-              <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${inSuite_banner}) lightgray 50% / cover no-repeat`}}>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.insuite.title}</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.insuite.subtitle}</Typography>
-                </Stack>
-                <Stack mt="auto" flexDirection="row" gap="12px">
-                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(inSuiteRef)} type="outlined" />
-                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
-                </Stack>
-              </Stack>
-              <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${OMNI_banner}) lightgray 50% / cover no-repeat`}}>
-                <Stack>
-                  <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
-                  <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.omni.title}</Typography>
-                  <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.omni.subtitle}</Typography>
-                </Stack>
-                <Stack mt="auto" flexDirection="row" gap="12px">
-                  <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(omniRef)} type="outlined" />
-                  <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
-                </Stack>
-              </Stack>
-            </Stack>
+        <FadeInOnScroll threshold={0.1} type="fadeFromDown">
+          <Stack width={fixWidth} alignItems="center">
             <Stack alignItems="center" mb="40px">
-              <Typography fontSize="18px" fontWeight="400" color={color.grey.grey11}>{textConst.capped}</Typography>
+              <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.kickstart}</Typography>
+              <Typography fontSize="24px" fontWeight="500" color={color.grey.grey10}>{textConst.with}</Typography>
+              <Typography mt="-8px" fontSize="48px" fontWeight="600" color={color.main}>{textConst.infront}</Typography>
+              <Typography mt="16px" fontSize="20px" fontWeight="600" color={color.grey.grey11}>{textConst.officiallyAppointed}</Typography>
+            </Stack>
+            <Stack flex={1} gap="24px">
+              <Stack gap="24px" flexDirection="row">
+                <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${EMIS360_banner}) lightgray 50% / cover no-repeat`}}>
+                  <Stack>
+                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
+                    <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.emis.title}</Typography>
+                    <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.emis.subtitle}</Typography>
+                  </Stack>
+                  <Stack mt="auto" flexDirection="row" gap="12px">
+                    <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(emisRef)} type="outlined"/>
+                    <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
+                  </Stack>
+                </Stack>
+                <Stack flex={1} gap="24px" p="24px" borderRadius="16px" sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${altHR_banner}) lightgray 50% / cover no-repeat`}}>
+                  <Stack>
+                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
+                    <Stack my="8px">
+                      <img src={altHR} alt="alt" width="166px" height="32px"/>
+                    </Stack>
+                    <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.althr.subtitle}</Typography>
+                  </Stack>
+                  <Stack mt="auto" flexDirection="row" gap="12px">
+                    <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(altHrRef)} type="outlined" />
+                    <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained"/>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack gap="24px" flexDirection="row">
+                <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${inSuite_banner}) lightgray 50% / cover no-repeat`}}>
+                  <Stack>
+                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
+                    <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.insuite.title}</Typography>
+                    <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.insuite.subtitle}</Typography>
+                  </Stack>
+                  <Stack mt="auto" flexDirection="row" gap="12px">
+                    <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(inSuiteRef)} type="outlined" />
+                    <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
+                  </Stack>
+                </Stack>
+                <Stack flex={1} gap="24px" p="24px" borderRadius="16px"  sx={{background: `linear-gradient(90deg, rgba(255, 255, 255, 0.10) 100%), url(${OMNI_banner}) lightgray 50% / cover no-repeat`}}>
+                  <Stack>
+                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{textConst["50%Grant"]}</Typography>
+                    <Typography fontSize="32px" fontWeight="600" color={color.grey.grey12}>{solutions.omni.title}</Typography>
+                    <Typography fontSize="16px" fontWeight="600" color={color.grey.grey11}>{solutions.omni.subtitle}</Typography>
+                  </Stack>
+                  <Stack mt="auto" flexDirection="row" gap="12px">
+                    <NavigateButton text={buttonText.moreDetails} function={()=> scrollTo(omniRef)} type="outlined" />
+                    <NavigateButton text={buttonText.getOffer} function={()=>scrollTo(formRef)} icon={East} borderRadius="300px" type="contained" />
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack alignItems="center" mb="40px">
+                <Typography fontSize="18px" fontWeight="400" color={color.grey.grey11}>{textConst.capped}</Typography>
+              </Stack>
+            </Stack>
+            <Stack my="40px" flexDirection="row" alignItems="center">
+              <Typography fontSize="32px" fontWeight="500" color={color.grey.grey11}>{textConst.startingFrom}</Typography>
+              <Typography ml="6px" fontSize="32px" fontWeight="500" color={color.main}>{textConst.rm8}</Typography>
+              <Typography mt="8px" ml="6px" fontSize="20px" fontWeight="500" color={color.grey.grey11}>{textConst.monthlyUser}</Typography>
             </Stack>
           </Stack>
-          <Stack my="40px" flexDirection="row" alignItems="center">
-            <Typography fontSize="32px" fontWeight="500" color={color.grey.grey11}>{textConst.startingFrom}</Typography>
-            <Typography ml="6px" fontSize="32px" fontWeight="500" color={color.main}>{textConst.rm8}</Typography>
-            <Typography mt="8px" ml="6px" fontSize="20px" fontWeight="500" color={color.grey.grey11}>{textConst.monthlyUser}</Typography>
-          </Stack>
-        </Stack>
+        </FadeInOnScroll>
       </Stack>
       <Stack pt="32px" width={fixWidth} flexDirection="row">
         <Stack height="267px" mx="24px" gap="24px" sx={{position: "sticky", top: 164}} display={displayWidthBelow1k ? "none" : "flex"}>
@@ -304,7 +312,7 @@ function WebView() {
             {(Object.entries(solutionRefList) as [SolutionKey, any][]).map(([solutionKey, ref]) => {
               const solution = solutions[solutionKey];
               return (
-                <Stack flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(ref)}>
+                <Stack key={solutionKey} flexDirection="row" alignItems="center" gap="10px" sx={{cursor: "pointer"}} onClick={()=> scrollTo(ref)}>
                   <Stack borderRadius="16px" bgcolor={displaySolution === solutionKey ? color.main : color.grey.grey6} width="40px" height="7px"></Stack>
                   <Typography fontSize="16px" fontWeight="600" color={displaySolution === solutionKey ? color.main : color.grey.grey12}>{solution?.title}</Typography>
                 </Stack>
@@ -427,26 +435,48 @@ function WebView() {
       </Stack>
       <Stack ref={stepByStepRef} sx={{...containerStyle, background: "linear-gradient(104deg, rgba(255, 64, 16, 0.10) 1.81%, rgba(255, 85, 23, 0.10) 99.04%)"}} bgcolor={color.orange.orange3}>
         <Stack bgcolor={color.white} width="100%" height="66px" sx={{clipPath: "ellipse(50% 100% at 50% 0%)"}}></Stack>
-        <Stack width={fixWidth} pt="16px" alignItems="center" gap="24px">
-          <Stack alignItems="center">
-            <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.stepByStep}</Typography>
-            <Stack flexDirection="row" alignItems="center" gap="12px">
-              <Typography mt="8px" fontSize="32px" fontWeight="500" color={color.grey.grey12}>{textConst.to}</Typography>
-              <Typography fontSize="48px" fontWeight="600" color={color.main}>{textConst.gettingSolution}</Typography>
+        <FadeInOnScroll threshold={0.1} type="fadeFromDown">
+          <Stack width={fixWidth} pt="16px" alignItems="center" gap="24px">
+            <Stack alignItems="center">
+              <Typography fontSize="32px" fontWeight="600" color={color.black}>{textConst.stepByStep}</Typography>
+              <Stack flexDirection="row" alignItems="center" gap="12px">
+                <Typography mt="8px" fontSize="32px" fontWeight="500" color={color.grey.grey12}>{textConst.to}</Typography>
+                <Typography fontSize="48px" fontWeight="600" color={color.main}>{textConst.gettingSolution}</Typography>
+              </Stack>
             </Stack>
-          </Stack>
-          <Stack gap="27px" flexDirection="row" justifyContent="center">
-            {Object.entries(stepGuides).slice(0, 3).map(([index, step]) => {
-              const isFirst = index === "1";
-              return (
-                <Stack key={index} width={displayWidthBelow1k ? "30%" : "316px"} p="24px" pb="48px" borderRadius="16px" bgcolor={color.white} gap="4px">
-                  <Stack p="2px 16px" mb="20px" bgcolor={color.orange.orange3} borderRadius="300px" width="fit-content" alignItems="center">
-                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{step.step}</Typography>
+            <Stack gap="27px" flexDirection="row" justifyContent="center">
+              {Object.entries(stepGuides).slice(0, 3).map(([index, step]) => {
+                const isFirst = index === "1";
+                return (
+                  <Stack key={index} width={displayWidthBelow1k ? "30%" : "316px"} p="24px" pb="48px" borderRadius="16px" bgcolor={color.white} gap="4px">
+                    <Stack p="2px 16px" mb="20px" bgcolor={color.orange.orange3} borderRadius="300px" width="fit-content" alignItems="center">
+                      <Typography fontSize="16px" fontWeight="600" color={color.main}>{step.step}</Typography>
+                    </Stack>
+                    <Typography fontSize="20px" fontWeight="600" color={color.main3}>{step.title}</Typography>
+                    {isFirst ?
+                      <Typography fontSize="16px" fontWeight="400" color={color.grey.grey12}>{step.description[0]}</Typography>
+                    :
+                      <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
+                        {step.description.map((point, index) => (
+                          <ListItem key={index} sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
+                            <Typography fontSize="16px" fontWeight="400" color={color.grey.grey12}>{point}</Typography>
+                          </ListItem>
+                        ))}
+                      </List>
+                    }
                   </Stack>
-                  <Typography fontSize="20px" fontWeight="600" color={color.main3}>{step.title}</Typography>
-                  {isFirst ?
-                    <Typography fontSize="16px" fontWeight="400" color={color.grey.grey12}>{step.description[0]}</Typography>
-                  :
+                )
+              })}
+            </Stack>
+            <Stack gap="27px" flexDirection="row" justifyContent="center">
+              {Object.entries(stepGuides).slice(3, 5).map(([index, step]) => {
+                const isLast = index === "5";
+                return (
+                  <Stack key={index} width={displayWidthBelow1k ? "30%" : "316px"} p="24px" borderRadius="16px" bgcolor={color.white} gap="4px">
+                    <Stack p="2px 16px" mb="20px" border={isLast ? "1px solid" : ""} borderColor={isLast ? color.main : ""} bgcolor={isLast ? "" : color.orange.orange3} borderRadius="300px" width="fit-content" alignItems="center">
+                      <Typography fontSize="16px" fontWeight="600" color={color.main}>{step.step}</Typography>
+                    </Stack>
+                    <Typography fontSize="20px" fontWeight="600" color={color.main3}>{step.title}</Typography>
                     <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
                       {step.description.map((point, index) => (
                         <ListItem key={index} sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
@@ -454,32 +484,12 @@ function WebView() {
                         </ListItem>
                       ))}
                     </List>
-                  }
-                </Stack>
-              )
-            })}
-          </Stack>
-          <Stack gap="27px" flexDirection="row" justifyContent="center">
-            {Object.entries(stepGuides).slice(3, 5).map(([index, step]) => {
-              const isLast = index === "5";
-              return (
-                <Stack key={index} width={displayWidthBelow1k ? "30%" : "316px"} p="24px" borderRadius="16px" bgcolor={color.white} gap="4px">
-                  <Stack p="2px 16px" mb="20px" border={isLast ? "1px solid" : ""} borderColor={isLast ? color.main : ""} bgcolor={isLast ? "" : color.orange.orange3} borderRadius="300px" width="fit-content" alignItems="center">
-                    <Typography fontSize="16px" fontWeight="600" color={color.main}>{step.step}</Typography>
                   </Stack>
-                  <Typography fontSize="20px" fontWeight="600" color={color.main3}>{step.title}</Typography>
-                  <List sx={{ listStyleType: 'disc', marginLeft: "24px" }}>
-                    {step.description.map((point, index) => (
-                      <ListItem key={index} sx={{ display: 'list-item', pl: "4px", py: "0px" }}>
-                        <Typography fontSize="16px" fontWeight="400" color={color.grey.grey12}>{point}</Typography>
-                      </ListItem>
-                    ))}
-                  </List>
-                </Stack>
-              )
-            })}
+                )
+              })}
+            </Stack>
           </Stack>
-        </Stack>
+        </FadeInOnScroll>
         <Stack width="100%" mt="24px" height="66px" sx={{clipPath: "ellipse(50% 100% at 50% 100%)", background: "linear-gradient(180deg, #FFE8D9 -6.04%, #FFF 100%)"}}></Stack>
       </Stack>
       <Stack ref={formRef} py="80px" sx={{...containerStyle, background: "linear-gradient(180deg, #FFF 0%, #FEF8F4 100%)"}}>
@@ -594,7 +604,9 @@ function WebView() {
         </Stack>
       </Stack>
       <Stack py="80px" sx={{...containerStyle, background: "linear-gradient(180deg, #FFF 0%, #FEF8F4 100%)"}}>
-        <FAQ view="web" fixWidth={fixWidth}/>
+        <FadeInOnScroll threshold={0.05} type="fadeFromRight">
+          <FAQ view="web" fixWidth={fixWidth}/>
+        </FadeInOnScroll>
       </Stack>
       <Stack py="80px" sx={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}} bgcolor={color.grey.grey11}>
         <Footer fixWidth={fixWidth} view="web" />

@@ -1,0 +1,16 @@
+export { default as InfrontLogo } from "./Infront_Logo_With_CDB_Logo_1.png";
+export { default as InfrontLogo2 } from "./Infront_Logo_With_CDB_Logo_2.png";
+export { default as mdeclogo } from "./mdeclogo.png";
+export { default as bsnlogo } from "./bsnlogo.png";
+export { default as madanilogo } from "./madanilogo.png";
+export { default as mcmclogo } from "./mcmclogo.png";
+export { default as Frame_4 } from "./Frame_4.png";
+export { default as altHR } from "./altHR.svg";
+export { default as Mobile_Banner_Background } from "./Mobile_Banner_Background.png";
+export { default as madanibackground } from "./madanibackground.png";
+export { default as altHR_banner } from "./altHR_banner.png";
+export { default as EMIS360_banner } from "./EMIS360_banner.png";
+export { default as OMNI_banner } from "./OMNI_banner.png";
+export { default as inSuite_banner } from "./inSuite_banner.png";
+export { default as greybackground } from "./greybackground.png";
+export { default as headbackground } from "./headbackground.png";
